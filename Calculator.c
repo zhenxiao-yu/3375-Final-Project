@@ -33,6 +33,9 @@ void DisplayValue(int value)
     int bit5 = lookUpTable[1];
     int bit6 = lookUpTable[1];
 
+    // if value can be represented by 6 digits
+    if (countDigit(value) <= 6)
+
     // Displaying bit 1 - 4 of value 
     *Display1_ptr = bit4 << (3 * BYTE) |
                     bit3 << (2 * BYTE) |
@@ -43,6 +46,31 @@ void DisplayValue(int value)
      // Displaying bit 5 - 6 of value 
     *Display2_ptr = bit6 << (1 * BYTE) |
                     bit5 << (0 * BYTE);
+}
+
+//* utilty functions*//
+int countDigit (int val) {
+    int count = 0;
+    while (val!= 0) {
+        val = val/10;
+        count++;
+    }
+    return count;
+}
+
+// Display 'Error' Message on 7-segment display
+void DisplayError() {
+    int BYTE = 8;
+    int Letter_E = 0x79;
+    int letter_r = 0x50;
+    int letter_o = 0x5C;
+    // Displaying r + o
+    *Display1_ptr = letter_r << (3 * BYTE) |
+                    letter_r << (2 * BYTE) |
+                    letter_o << (1 * BYTE) |
+                    letter_r << (0 * BYTE);
+     // Displaying E
+    *Display2_ptr = Letter_E;
 }
 
 // Reads switches
@@ -71,7 +99,7 @@ int main(void)
         // plus
         if (ReadButton(0))
         {
-
+            DisplayError();
         }
         // minus
         if (ReadButton(1))
