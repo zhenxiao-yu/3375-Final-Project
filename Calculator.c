@@ -7,12 +7,12 @@
 #define SW_BASE 0xFF200040
 #define KEY_BASE 0xFF200050
 
-volatile int *seconds_display_ptr = (int *)HEX3_HEX0_BASE;
-volatile int *minutes_display_ptr = (int *)HEX5_HEX4_BASE;
+volatile int *Display1_ptr = (int *)HEX3_HEX0_BASE;
+volatile int *Display2_ptr = (int *)HEX5_HEX4_BASE;
 
 // Displays number on 7 seg display
-void DisplayHex(int value)
-{
+void DisplayValue(int value)
+{   // max = 10, displays number from 0 - 9
     char lookUpTable[10];
     lookUpTable[0] = 0x3F;
     lookUpTable[1] = 0x06;
@@ -25,18 +25,24 @@ void DisplayHex(int value)
     lookUpTable[8] = 0x7F;
     lookUpTable[9] = 0x6F;
 
-    int Byte = 8;
-    int digit0;
-    int digit1;
-    int digit2;
-    int digit3; 
-    int digit5;
+    int BYTE = 8;
+    int bit1 = lookUpTable[1];
+    int bit2 = lookUpTable[1];
+    int bit3 = lookUpTable[1]; 
+    int bit4 = lookUpTable[1]; 
+    int bit5 = lookUpTable[1];
+    int bit6 = lookUpTable[1];
 
-    // Displaying seconds and milliseconds
-    *seconds_display_ptr = lookUpTable[s / 10] << 24 | lookUpTable[s % 10] << 16 | lookUpTable[ms / 10] << 8 | lookUpTable[ms % 10];
+    // Displaying bit 1 - 4 of value 
+    *Display1_ptr = bit4 << (3 * BYTE) |
+                    bit3 << (2 * BYTE) |
+                    bit2 << (1 * BYTE) |
+                    bit1 << (0 * BYTE);
 
-    // Displaying minutes
-    *minutes_display_ptr = lookUpTable[min / 10] << 8 | lookUpTable[min % 10];
+
+     // Displaying bit 5 - 6 of value 
+    *Display2_ptr = bit6 << (1 * BYTE) |
+                    bit5 << (0 * BYTE);
 }
 
 // Reads switches
@@ -56,22 +62,8 @@ int ReadButton(int btn)
 
 int main(void)
 {
-
-    // // Is 1 if the timer is running, 0 if it is stopped
-    // int running = 0;
-
-    // // Initial timer values
-    // int ms = 0;
-    // int s = 0;
-    // int min = 0;
-
-    // // Initial lap values
-    // int lap_ms = 0;
-    // int lap_s = 0;
-    // int lap_min = 0;
-
-    // Sets initial display to 00:00:00
-    DisplayHex(ms, s, min);
+    // Sets initial display to 0
+    DisplayValue(0);
 
     // Main loop
     while (1)
