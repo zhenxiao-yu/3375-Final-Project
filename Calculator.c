@@ -104,17 +104,21 @@ void DisplayValue(int value) { // max = 10, displays number from 0 - 9
     bit5 << (0 * BYTE);
 }
 
-// Reads switches
-int ReadSwitches(void){
-    volatile int *SW_ptr = (int *)SW_BASE;
-    return (*(SW_ptr));
-}
 
 // Reads buttons
 int ReadButton(int btn) {
   volatile int * BTN_ptr = (int * ) KEY_BASE;
   // Returns 1 if the given button is pressed, 0 otherwise due to & operator
   return (( * BTN_ptr >> (btn)) & 1);
+}
+
+
+// Reads switches
+int ReadSwitch(int sw) {
+  // pointer to switch address
+  volatile int * SW_ptr = (int * ) SW_BASE;
+  // Returns 1 if the given button is pressed, 0 otherwise due to & operator
+  return (( * SW_ptr >> (sw)) & 1);
 }
 
 // get input from switch 0 - 5
@@ -153,28 +157,11 @@ int main(void) {
       DisplayOperator(4);
     }
 
-    // // on / off 
-    // if (ReadSwitches() == 10) {
-    //     DisplayError();
-    // }
-
-    // // clear
-    // else if (ReadSwitches() == 9) {
-
-    // }
-
-    // // show answer
-    // else if (ReadSwitches() == 8) {
-
-    // }
-
-    // If first switch is on, display lap time
-    if (ReadSwitches() == 6)
-    {
-        DisplayValue(123);
-    } else // Otherwise, display current stopwatch time
-    {
-        DisplayError();
+    // switch mode
+    if (ReadSwitch(9)){
+        DisplayValue(GetInput());
+    } else {
+        DisplayValue(intToBin(GetInput()));
     }
   }
 }
