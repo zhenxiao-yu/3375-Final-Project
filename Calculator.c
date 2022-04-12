@@ -195,19 +195,29 @@ int main(void) {
           DisplayError();
         }
       }
+      
+      //clear answer
+      if (ReadSwitch(8)) {
+          num1 = 0;
+          num2 = 0;
+          answer = 0;
+          operator = 0;
+          DisplayValue(0);
+      }
+
       // show answer
-      if (ReadSwitch(7)) {
+      if (ReadSwitch(7) && !ReadSwitch(8)) {
         num2 = GetInput();
         if (operator == 1) {
           answer = num1 + num2;
           if (!ReadSwitch(6)) { //not in decimal mode
-            if (countDigit(intToBin(answer)) <= 6) {
+            if (countDigit(intToBin(answer)) <= 6 && answer>=0) {
               DisplayValue(intToBin(answer));
             } else {
               DisplayError();
             }
           } else {
-            if (countDigit(answer) <= 6) {
+            if (countDigit(answer) <= 6 && answer>=0) {
               DisplayValue(answer);
             } else {
               DisplayError();
@@ -216,13 +226,13 @@ int main(void) {
         } else if (operator == 2) {
           answer = num1 - num2;
           if (!ReadSwitch(6)) { //not in decimal mode
-            if (countDigit(intToBin(answer)) <= 6) {
+            if (countDigit(intToBin(answer)) <= 6 && answer>=0) {
               DisplayValue(intToBin(answer));
             } else {
               DisplayError();
             }
           } else {
-            if (countDigit(answer) <= 6) {
+            if (countDigit(answer) <= 6 && answer>=0) {
               DisplayValue(answer);
             } else {
               DisplayError();
@@ -231,13 +241,13 @@ int main(void) {
         } else if (operator == 3) {
           answer = num1 * num2;
           if (!ReadSwitch(6)) { //not in decimal mode
-            if (countDigit(intToBin(answer)) <= 6) {
+            if (countDigit(intToBin(answer)) <= 6 && answer>=0) {
               DisplayValue(intToBin(answer));
             } else {
               DisplayError();
             }
           } else {
-            if (countDigit(answer) <= 6) {
+            if (countDigit(answer) <= 6 && answer>=0) {
               DisplayValue(answer);
             } else {
               DisplayError();
@@ -246,13 +256,13 @@ int main(void) {
         } else if (operator == 4) {
           answer = num1 / num2;
           if (!ReadSwitch(6)) { //not in decimal mode
-            if (countDigit(intToBin(answer)) <= 6) {
+            if (countDigit(intToBin(answer)) <= 6 && answer>=0) {
               DisplayValue(intToBin(answer));
             } else {
               DisplayError();
             }
           } else {
-            if (countDigit(answer) <= 6) {
+            if (countDigit(answer) <= 6 && answer>=0) {
               DisplayValue(answer);
             } else {
               DisplayError();
