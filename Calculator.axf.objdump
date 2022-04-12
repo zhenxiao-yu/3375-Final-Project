@@ -7,8 +7,8 @@ Disassembly of section .text:
 00000000 <__cs3_interrupt_vector>:
    0:	18 f0 9f e5 18 f0 9f e5 18 f0 9f e5 18 f0 9f e5     ................
   10:	18 f0 9f e5 18 f0 9f e5 18 f0 9f e5 18 f0 9f e5     ................
-  20:	40 00 00 00 a0 0a 00 00 a4 0a 00 00 a8 0a 00 00     @...............
-  30:	ac 0a 00 00 9c 0a 00 00 b0 0a 00 00 b4 0a 00 00     ................
+  20:	40 00 00 00 c4 09 00 00 c8 09 00 00 cc 09 00 00     @...............
+  30:	d0 09 00 00 c0 09 00 00 d4 09 00 00 d8 09 00 00     ................
 
 00000040 <__cs3_reset>:
   40:	ea000026 	b	e0 <__cs3_start_asm_sim>
@@ -50,9 +50,9 @@ Disassembly of section .text:
   c8:	e3760001 	cmn	r6, #1
   cc:	e2855014 	add	r5, r5, #20
   d0:	1affffe3 	bne	64 <__cs3_start_c+0x20>
-  d4:	eb000257 	bl	a38 <__cs3_premain>
+  d4:	eb000220 	bl	95c <__cs3_premain>
   d8:	00000001 	.word	0x00000001
-  dc:	00000b9c 	.word	0x00000b9c
+  dc:	00000ac0 	.word	0x00000ac0
 
 000000e0 <__cs3_start_asm_sim>:
   e0:	e28f103c 	add	r1, pc, #60	; 0x3c
@@ -71,10 +71,10 @@ Disassembly of section .text:
  114:	15810000 	strne	r0, [r1]
  118:	eaffffc9 	b	44 <__cs3_start_c>
  11c:	3ffffff8 	.word	0x3ffffff8
- 120:	00000fe0 	.word	0x00000fe0
+ 120:	00000f00 	.word	0x00000f00
 
 00000124 <__cs3_heap_start_ptr>:
- 124:	00001008 	.word	0x00001008
+ 124:	00000f28 	.word	0x00000f28
 
 00000128 <_start>:
  128:	e51fd000 	ldr	sp, [pc, #-0]	; 130 <_start+0x8>
@@ -96,8 +96,8 @@ Disassembly of section .text:
  160:	e1a0e00f 	mov	lr, pc
  164:	e12fff13 	bx	r3
  168:	eafffff7 	b	14c <deregister_tm_clones+0x18>
- 16c:	00000fe8 	.word	0x00000fe8
- 170:	00000feb 	.word	0x00000feb
+ 16c:	00000f08 	.word	0x00000f08
+ 170:	00000f0b 	.word	0x00000f0b
  174:	00000000 	.word	0x00000000
 
 00000178 <register_tm_clones>:
@@ -117,8 +117,8 @@ Disassembly of section .text:
  1ac:	e1a0e00f 	mov	lr, pc
  1b0:	e12fff12 	bx	r2
  1b4:	eafffff7 	b	198 <register_tm_clones+0x20>
- 1b8:	00000fe8 	.word	0x00000fe8
- 1bc:	00000fe8 	.word	0x00000fe8
+ 1b8:	00000f08 	.word	0x00000f08
+ 1bc:	00000f08 	.word	0x00000f08
  1c0:	00000000 	.word	0x00000000
 
 000001c4 <__do_global_dtors_aux>:
@@ -136,9 +136,9 @@ Disassembly of section .text:
  1f0:	e5c43000 	strb	r3, [r4]
  1f4:	e8bd4010 	pop	{r4, lr}
  1f8:	e12fff1e 	bx	lr
- 1fc:	00000fe8 	.word	0x00000fe8
+ 1fc:	00000f08 	.word	0x00000f08
  200:	00000000 	.word	0x00000000
- 204:	00000b40 	.word	0x00000b40
+ 204:	00000a64 	.word	0x00000a64
 
 00000208 <frame_dummy>:
  208:	e92d4008 	push	{r3, lr}
@@ -158,1014 +158,883 @@ Disassembly of section .text:
  240:	e8bd4008 	pop	{r3, lr}
  244:	eaffffcb 	b	178 <register_tm_clones>
  248:	00000000 	.word	0x00000000
- 24c:	00000b40 	.word	0x00000b40
- 250:	00000fec 	.word	0x00000fec
- 254:	00000ba0 	.word	0x00000ba0
+ 24c:	00000a64 	.word	0x00000a64
+ 250:	00000f0c 	.word	0x00000f0c
+ 254:	00000ac0 	.word	0x00000ac0
  258:	00000000 	.word	0x00000000
 
 0000025c <countDigit>:
-volatile int *Display2_ptr = (int *)HEX5_HEX4_BASE;
+volatile int * Display2_ptr = (int * ) HEX5_HEX4_BASE;
 
 //* utilty functions*//
-int countDigit (int val) {
-    int count = 0;
-    while (val!= 0) {
+int countDigit(int val) {
+  int count = 0;
+  while (val != 0) {
  25c:	e2503000 	subs	r3, r0, #0
  260:	0a000008 	beq	288 <countDigit+0x2c>
-volatile int *Display1_ptr = (int *)HEX3_HEX0_BASE;
-volatile int *Display2_ptr = (int *)HEX5_HEX4_BASE;
+volatile int * Display1_ptr = (int * ) HEX3_HEX0_BASE;
+volatile int * Display2_ptr = (int * ) HEX5_HEX4_BASE;
 
 //* utilty functions*//
-int countDigit (int val) {
-    int count = 0;
+int countDigit(int val) {
+  int count = 0;
  264:	e3a00000 	mov	r0, #0
-    while (val!= 0) {
-        val = val/10;
+  while (val != 0) {
+    val = val / 10;
  268:	e3061667 	movw	r1, #26215	; 0x6667
  26c:	e3461666 	movt	r1, #26214	; 0x6666
  270:	e0c2c391 	smull	ip, r2, r1, r3
  274:	e1a03fc3 	asr	r3, r3, #31
-        count++;
+    count++;
  278:	e2800001 	add	r0, r0, #1
-volatile int *Display2_ptr = (int *)HEX5_HEX4_BASE;
+volatile int * Display2_ptr = (int * ) HEX5_HEX4_BASE;
 
 //* utilty functions*//
-int countDigit (int val) {
-    int count = 0;
-    while (val!= 0) {
+int countDigit(int val) {
+  int count = 0;
+  while (val != 0) {
  27c:	e0733142 	rsbs	r3, r3, r2, asr #2
  280:	1afffffa 	bne	270 <countDigit+0x14>
  284:	e12fff1e 	bx	lr
-volatile int *Display1_ptr = (int *)HEX3_HEX0_BASE;
-volatile int *Display2_ptr = (int *)HEX5_HEX4_BASE;
+volatile int * Display1_ptr = (int * ) HEX3_HEX0_BASE;
+volatile int * Display2_ptr = (int * ) HEX5_HEX4_BASE;
 
 //* utilty functions*//
-int countDigit (int val) {
-    int count = 0;
+int countDigit(int val) {
+  int count = 0;
  288:	e3a00000 	mov	r0, #0
-    while (val!= 0) {
-        val = val/10;
-        count++;
-    }
-    return count;
+  while (val != 0) {
+    val = val / 10;
+    count++;
+  }
+  return count;
 }
  28c:	e12fff1e 	bx	lr
 
-00000290 <DisplayError>:
-    int BYTE = 8;
-    int Letter_E = 0x79; //1111001
-    int letter_r = 0x50; //1010000
-    int letter_o = 0x5C; //1011100
-    // Displaying r + o
-    *Display1_ptr = letter_r << (3 * BYTE) |
- 290:	e3003ba8 	movw	r3, #2984	; 0xba8
- 294:	e3403000 	movt	r3, #0
- 298:	e5931000 	ldr	r1, [r3]
- 29c:	e3052c50 	movw	r2, #23632	; 0x5c50
- 2a0:	e3452050 	movt	r2, #20560	; 0x5050
- 2a4:	e5812000 	str	r2, [r1]
-                    letter_r << (2 * BYTE) |
-                    letter_o << (1 * BYTE) |
-                    letter_r << (0 * BYTE);
-     // Displaying E
-    *Display2_ptr = Letter_E;
- 2a8:	e5933004 	ldr	r3, [r3, #4]
- 2ac:	e3a02079 	mov	r2, #121	; 0x79
- 2b0:	e5832000 	str	r2, [r3]
- 2b4:	e12fff1e 	bx	lr
+00000290 <intToBin>:
 
-000002b8 <DisplayOperator>:
+unsigned intToBin(unsigned k) {
+ 290:	e92d4010 	push	{r4, lr}
+  if (k == 0) return 0;
+ 294:	e2504000 	subs	r4, r0, #0
+ 298:	0a000007 	beq	2bc <intToBin+0x2c>
+  if (k == 1) return 1; /* optional */
+ 29c:	e3540001 	cmp	r4, #1
+ 2a0:	0a000007 	beq	2c4 <intToBin+0x34>
+  return (k % 2) + 10 * intToBin(k / 2);
+ 2a4:	e1a000a4 	lsr	r0, r4, #1
+ 2a8:	ebfffff8 	bl	290 <intToBin>
+ 2ac:	e0800100 	add	r0, r0, r0, lsl #2
+ 2b0:	e2044001 	and	r4, r4, #1
+ 2b4:	e0840080 	add	r0, r4, r0, lsl #1
+ 2b8:	e8bd8010 	pop	{r4, pc}
+  }
+  return count;
+}
+
+unsigned intToBin(unsigned k) {
+  if (k == 0) return 0;
+ 2bc:	e3a00000 	mov	r0, #0
+ 2c0:	e8bd8010 	pop	{r4, pc}
+  if (k == 1) return 1; /* optional */
+ 2c4:	e3a00001 	mov	r0, #1
+  return (k % 2) + 10 * intToBin(k / 2);
+}
+ 2c8:	e8bd8010 	pop	{r4, pc}
+
+000002cc <DisplayError>:
+  int BYTE = 8;
+  int Letter_E = 0x79; //1111001
+  int letter_r = 0x50; //1010000
+  int letter_o = 0x5C; //1011100
+  // Displaying r + o
+  * Display1_ptr = letter_r << (3 * BYTE) |
+ 2cc:	e3003ac8 	movw	r3, #2760	; 0xac8
+ 2d0:	e3403000 	movt	r3, #0
+ 2d4:	e5931000 	ldr	r1, [r3]
+ 2d8:	e3052c50 	movw	r2, #23632	; 0x5c50
+ 2dc:	e3452050 	movt	r2, #20560	; 0x5050
+ 2e0:	e5812000 	str	r2, [r1]
+    letter_r << (2 * BYTE) |
+    letter_o << (1 * BYTE) |
+    letter_r << (0 * BYTE);
+  // Displaying E
+  * Display2_ptr = Letter_E;
+ 2e4:	e5933004 	ldr	r3, [r3, #4]
+ 2e8:	e3a02079 	mov	r2, #121	; 0x79
+ 2ec:	e5832000 	str	r2, [r3]
+ 2f0:	e12fff1e 	bx	lr
+
+000002f4 <DisplayOperator>:
 }
 
 void DisplayOperator(int oprID) {
- 2b8:	e24dd008 	sub	sp, sp, #8
-    char oprTable[5];
-    oprTable[0] = 0x3F; // used as capital letter 'O'
- 2bc:	e3a0303f 	mov	r3, #63	; 0x3f
- 2c0:	e5cd3000 	strb	r3, [sp]
-    oprTable[1] = 0x06; // + 
- 2c4:	e3a03006 	mov	r3, #6
- 2c8:	e5cd3001 	strb	r3, [sp, #1]
-    oprTable[2] = 0x5B; // -
- 2cc:	e3a0305b 	mov	r3, #91	; 0x5b
- 2d0:	e5cd3002 	strb	r3, [sp, #2]
-    oprTable[3] = 0x4F; // x
- 2d4:	e3a0304f 	mov	r3, #79	; 0x4f
- 2d8:	e5cd3003 	strb	r3, [sp, #3]
-    oprTable[4] = 0x66; // /
- 2dc:	e3a03066 	mov	r3, #102	; 0x66
- 2e0:	e5cd3004 	strb	r3, [sp, #4]
+ 2f4:	e24dd008 	sub	sp, sp, #8
+  char oprTable[5];
+  oprTable[0] = 0x3F; // used as capital letter 'O'
+ 2f8:	e3a0303f 	mov	r3, #63	; 0x3f
+ 2fc:	e5cd3000 	strb	r3, [sp]
+  oprTable[1] = 0x06; // + 
+ 300:	e3a03006 	mov	r3, #6
+ 304:	e5cd3001 	strb	r3, [sp, #1]
+  oprTable[2] = 0x5B; // -
+ 308:	e3a0305b 	mov	r3, #91	; 0x5b
+ 30c:	e5cd3002 	strb	r3, [sp, #2]
+  oprTable[3] = 0x4F; // x
+ 310:	e3a0304f 	mov	r3, #79	; 0x4f
+ 314:	e5cd3003 	strb	r3, [sp, #3]
+  oprTable[4] = 0x66; // /
+ 318:	e3a03066 	mov	r3, #102	; 0x66
+ 31c:	e5cd3004 	strb	r3, [sp, #4]
 
-    int BYTE = 8;
-    int letter_p = 0x73; //1110011
-    int letter_r = 0x50; //1010000
-    // Displaying O + p + r + operator ID
-    *Display1_ptr = oprTable[0]     << (3 * BYTE) |
- 2e4:	e3003ba8 	movw	r3, #2984	; 0xba8
- 2e8:	e3403000 	movt	r3, #0
- 2ec:	e5931000 	ldr	r1, [r3]
-                    letter_p        << (2 * BYTE) |
-                    letter_r        << (1 * BYTE) |
-                    oprTable[oprID] << (0 * BYTE);
- 2f0:	e28d2008 	add	r2, sp, #8
- 2f4:	e0820000 	add	r0, r2, r0
- 2f8:	e5500008 	ldrb	r0, [r0, #-8]
-    int letter_p = 0x73; //1110011
-    int letter_r = 0x50; //1010000
-    // Displaying O + p + r + operator ID
-    *Display1_ptr = oprTable[0]     << (3 * BYTE) |
-                    letter_p        << (2 * BYTE) |
-                    letter_r        << (1 * BYTE) |
- 2fc:	e3a02a05 	mov	r2, #20480	; 0x5000
- 300:	e3432f73 	movt	r2, #16243	; 0x3f73
- 304:	e1802002 	orr	r2, r0, r2
+  int BYTE = 8;
+  int letter_p = 0x73; //1110011
+  int letter_r = 0x50; //1010000
+  // Displaying O + p + r + operator ID
+  * Display1_ptr = oprTable[0] << (3 * BYTE) |
+ 320:	e3003ac8 	movw	r3, #2760	; 0xac8
+ 324:	e3403000 	movt	r3, #0
+ 328:	e5931000 	ldr	r1, [r3]
+    letter_p << (2 * BYTE) |
+    letter_r << (1 * BYTE) |
+    oprTable[oprID] << (0 * BYTE);
+ 32c:	e28d2008 	add	r2, sp, #8
+ 330:	e0820000 	add	r0, r2, r0
+ 334:	e5500008 	ldrb	r0, [r0, #-8]
+  int letter_p = 0x73; //1110011
+  int letter_r = 0x50; //1010000
+  // Displaying O + p + r + operator ID
+  * Display1_ptr = oprTable[0] << (3 * BYTE) |
+    letter_p << (2 * BYTE) |
+    letter_r << (1 * BYTE) |
+ 338:	e3a02a05 	mov	r2, #20480	; 0x5000
+ 33c:	e3432f73 	movt	r2, #16243	; 0x3f73
+ 340:	e1802002 	orr	r2, r0, r2
 
-    int BYTE = 8;
-    int letter_p = 0x73; //1110011
-    int letter_r = 0x50; //1010000
-    // Displaying O + p + r + operator ID
-    *Display1_ptr = oprTable[0]     << (3 * BYTE) |
- 308:	e5812000 	str	r2, [r1]
-                    letter_p        << (2 * BYTE) |
-                    letter_r        << (1 * BYTE) |
-                    oprTable[oprID] << (0 * BYTE);
-    // turn off
-    *Display2_ptr = 0x00;
- 30c:	e5933004 	ldr	r3, [r3, #4]
- 310:	e3a02000 	mov	r2, #0
- 314:	e5832000 	str	r2, [r3]
+  int BYTE = 8;
+  int letter_p = 0x73; //1110011
+  int letter_r = 0x50; //1010000
+  // Displaying O + p + r + operator ID
+  * Display1_ptr = oprTable[0] << (3 * BYTE) |
+ 344:	e5812000 	str	r2, [r1]
+    letter_p << (2 * BYTE) |
+    letter_r << (1 * BYTE) |
+    oprTable[oprID] << (0 * BYTE);
+  // turn off
+  * Display2_ptr = 0x00;
+ 348:	e5933004 	ldr	r3, [r3, #4]
+ 34c:	e3a02000 	mov	r2, #0
+ 350:	e5832000 	str	r2, [r3]
 }
- 318:	e28dd008 	add	sp, sp, #8
- 31c:	e12fff1e 	bx	lr
+ 354:	e28dd008 	add	sp, sp, #8
+ 358:	e12fff1e 	bx	lr
 
-00000320 <DisplayValue>:
+0000035c <DisplayValue>:
 
 // Displays number on 7 seg display
-void DisplayValue(int value)
-{   // max = 10, displays number from 0 - 9
- 320:	e92d0070 	push	{r4, r5, r6}
- 324:	e24dd02c 	sub	sp, sp, #44	; 0x2c
-    char lookUpTable[10];
-    lookUpTable[0] = 0x3F;
- 328:	e3a0303f 	mov	r3, #63	; 0x3f
- 32c:	e5cd301c 	strb	r3, [sp, #28]
-    lookUpTable[1] = 0x06;
- 330:	e3a03006 	mov	r3, #6
- 334:	e5cd301d 	strb	r3, [sp, #29]
-    lookUpTable[2] = 0x5B;
- 338:	e3a0305b 	mov	r3, #91	; 0x5b
- 33c:	e5cd301e 	strb	r3, [sp, #30]
-    lookUpTable[3] = 0x4F;
- 340:	e3a0304f 	mov	r3, #79	; 0x4f
- 344:	e5cd301f 	strb	r3, [sp, #31]
-    lookUpTable[4] = 0x66;
- 348:	e3a03066 	mov	r3, #102	; 0x66
- 34c:	e5cd3020 	strb	r3, [sp, #32]
-    lookUpTable[5] = 0x6D;
- 350:	e3a0306d 	mov	r3, #109	; 0x6d
- 354:	e5cd3021 	strb	r3, [sp, #33]	; 0x21
-    lookUpTable[6] = 0x7D;
- 358:	e3a0307d 	mov	r3, #125	; 0x7d
- 35c:	e5cd3022 	strb	r3, [sp, #34]	; 0x22
-    lookUpTable[7] = 0x07;
- 360:	e3a03007 	mov	r3, #7
- 364:	e5cd3023 	strb	r3, [sp, #35]	; 0x23
-    lookUpTable[8] = 0x7F;
- 368:	e3a0307f 	mov	r3, #127	; 0x7f
- 36c:	e5cd3024 	strb	r3, [sp, #36]	; 0x24
-    lookUpTable[9] = 0x6F;
- 370:	e3a0306f 	mov	r3, #111	; 0x6f
- 374:	e5cd3025 	strb	r3, [sp, #37]	; 0x25
- 378:	e28d2018 	add	r2, sp, #24
-    // turn off
-    *Display2_ptr = 0x00;
+void DisplayValue(int value) { // max = 10, displays number from 0 - 9
+ 35c:	e92d0030 	push	{r4, r5}
+ 360:	e24dd028 	sub	sp, sp, #40	; 0x28
+  char lookUpTable[10];
+  lookUpTable[0] = 0x3F;
+ 364:	e3a0303f 	mov	r3, #63	; 0x3f
+ 368:	e5cd301c 	strb	r3, [sp, #28]
+  lookUpTable[1] = 0x06;
+ 36c:	e3a03006 	mov	r3, #6
+ 370:	e5cd301d 	strb	r3, [sp, #29]
+  lookUpTable[2] = 0x5B;
+ 374:	e3a0305b 	mov	r3, #91	; 0x5b
+ 378:	e5cd301e 	strb	r3, [sp, #30]
+  lookUpTable[3] = 0x4F;
+ 37c:	e3a0304f 	mov	r3, #79	; 0x4f
+ 380:	e5cd301f 	strb	r3, [sp, #31]
+  lookUpTable[4] = 0x66;
+ 384:	e3a03066 	mov	r3, #102	; 0x66
+ 388:	e5cd3020 	strb	r3, [sp, #32]
+  lookUpTable[5] = 0x6D;
+ 38c:	e3a0306d 	mov	r3, #109	; 0x6d
+ 390:	e5cd3021 	strb	r3, [sp, #33]	; 0x21
+  lookUpTable[6] = 0x7D;
+ 394:	e3a0307d 	mov	r3, #125	; 0x7d
+ 398:	e5cd3022 	strb	r3, [sp, #34]	; 0x22
+  lookUpTable[7] = 0x07;
+ 39c:	e3a03007 	mov	r3, #7
+ 3a0:	e5cd3023 	strb	r3, [sp, #35]	; 0x23
+  lookUpTable[8] = 0x7F;
+ 3a4:	e3a0307f 	mov	r3, #127	; 0x7f
+ 3a8:	e5cd3024 	strb	r3, [sp, #36]	; 0x24
+  lookUpTable[9] = 0x6F;
+ 3ac:	e3a0306f 	mov	r3, #111	; 0x6f
+ 3b0:	e5cd3025 	strb	r3, [sp, #37]	; 0x25
+ 3b4:	e28d2018 	add	r2, sp, #24
+  // turn off
+  * Display2_ptr = 0x00;
 }
 
 // Displays number on 7 seg display
-void DisplayValue(int value)
- 37c:	e1a0400d 	mov	r4, sp
-    int bit1, bit2, bit3, bit4, bit5, bit6;
-    // if value can be represented by 6 digits
-     int bitArray[6];
-     int i = 5;
-     while (i >= 0) {
-         bitArray[i] = value%10;
- 380:	e306c667 	movw	ip, #26215	; 0x6667
- 384:	e346c666 	movt	ip, #26214	; 0x6666
- 388:	e0c1309c 	smull	r3, r1, ip, r0
- 38c:	e1a03fc0 	asr	r3, r0, #31
- 390:	e0633141 	rsb	r3, r3, r1, asr #2
- 394:	e0831103 	add	r1, r3, r3, lsl #2
- 398:	e0400081 	sub	r0, r0, r1, lsl #1
- 39c:	e4020004 	str	r0, [r2], #-4
-         value/=10;
- 3a0:	e1a00003 	mov	r0, r3
-    int BYTE = 8;
-    int bit1, bit2, bit3, bit4, bit5, bit6;
-    // if value can be represented by 6 digits
-     int bitArray[6];
-     int i = 5;
-     while (i >= 0) {
- 3a4:	e1520004 	cmp	r2, r4
- 3a8:	1afffff6 	bne	388 <DisplayValue+0x68>
-         bitArray[i] = value%10;
-         value/=10;
-         i--;
-     }
-     if (bitArray[0] != 0) {
- 3ac:	e59d3004 	ldr	r3, [sp, #4]
- 3b0:	e3530000 	cmp	r3, #0
- 3b4:	0a00001e 	beq	434 <DisplayValue+0x114>
-         bit6 =  lookUpTable[bitArray[0]];
- 3b8:	e28d4028 	add	r4, sp, #40	; 0x28
- 3bc:	e0843003 	add	r3, r4, r3
- 3c0:	e553300c 	ldrb	r3, [r3, #-12]
-     } else {
-         bit6 = 0x00;
-     }
-     if (bitArray[0] != 0 && bitArray[1] != 0 ) {
- 3c4:	e59d2008 	ldr	r2, [sp, #8]
- 3c8:	e3520000 	cmp	r2, #0
- 3cc:	0a00001e 	beq	44c <DisplayValue+0x12c>
-         bit5 =  lookUpTable[bitArray[1]];
- 3d0:	e0842002 	add	r2, r4, r2
- 3d4:	e552100c 	ldrb	r1, [r2, #-12]
-     } else {
-         bit6 = 0x00;
-         bit5 = 0x00;
-     }
-     if (bitArray[0] != 0 && bitArray[1] != 0 && bitArray[2] != 0 ) {
- 3d8:	e59d200c 	ldr	r2, [sp, #12]
- 3dc:	e3520000 	cmp	r2, #0
- 3e0:	0a00003a 	beq	4d0 <DisplayValue+0x1b0>
-         bit4 =  lookUpTable[bitArray[2]]; 
- 3e4:	e0842002 	add	r2, r4, r2
- 3e8:	e552000c 	ldrb	r0, [r2, #-12]
- 3ec:	ea00003a 	b	4dc <DisplayValue+0x1bc>
-     } else {
-         bit6 = 0x00;
-         bit5 = 0x00;
-         bit4 = 0x00;
-     }
-     if (bitArray[0] != 0 && bitArray[1] != 0 && bitArray[2] != 0 && bitArray[3] != 0) {
- 3f0:	e59d2010 	ldr	r2, [sp, #16]
- 3f4:	e3520000 	cmp	r2, #0
- 3f8:	0a00003f 	beq	4fc <DisplayValue+0x1dc>
-         bit3 =  lookUpTable[bitArray[3]];
- 3fc:	e28d6028 	add	r6, sp, #40	; 0x28
- 400:	e0862002 	add	r2, r6, r2
- 404:	e552c00c 	ldrb	ip, [r2, #-12]
- 408:	ea00003f 	b	50c <DisplayValue+0x1ec>
-         bit6 = 0x00;
-         bit5 = 0x00;
-         bit4 = 0x00;  
-         bit3 = 0x00; 
-     } 
-     if (bitArray[0] != 0 && bitArray[1] != 0 && bitArray[2] != 0 && bitArray[3] != 0 &&  bitArray[4] != 0) {
- 40c:	e59d2010 	ldr	r2, [sp, #16]
- 410:	e3520000 	cmp	r2, #0
- 414:	0a000012 	beq	464 <DisplayValue+0x144>
- 418:	e59d2014 	ldr	r2, [sp, #20]
- 41c:	e3520000 	cmp	r2, #0
- 420:	0a000015 	beq	47c <DisplayValue+0x15c>
-         bit2 =  lookUpTable[bitArray[4]];
- 424:	e28d4028 	add	r4, sp, #40	; 0x28
- 428:	e0842002 	add	r2, r4, r2
- 42c:	e552400c 	ldrb	r4, [r2, #-12]
- 430:	ea000016 	b	490 <DisplayValue+0x170>
-     } else {
-         bit6 = 0x00;
- 434:	e3a03000 	mov	r3, #0
-         bit5 = 0x00;
- 438:	e1a01003 	mov	r1, r3
-         bit4 = 0x00;  
- 43c:	e1a00003 	mov	r0, r3
-         bit3 = 0x00; 
- 440:	e1a0c003 	mov	ip, r3
-         bit2 = 0x00; 
- 444:	e1a04003 	mov	r4, r3
- 448:	ea000010 	b	490 <DisplayValue+0x170>
-         bit3 = 0x00; 
-     } 
-     if (bitArray[0] != 0 && bitArray[1] != 0 && bitArray[2] != 0 && bitArray[3] != 0 &&  bitArray[4] != 0) {
-         bit2 =  lookUpTable[bitArray[4]];
-     } else {
-         bit6 = 0x00;
- 44c:	e3a03000 	mov	r3, #0
-         bit5 = 0x00;
- 450:	e1a01003 	mov	r1, r3
-         bit4 = 0x00;  
- 454:	e1a00003 	mov	r0, r3
-         bit3 = 0x00; 
- 458:	e1a0c003 	mov	ip, r3
-         bit2 = 0x00; 
- 45c:	e1a04003 	mov	r4, r3
- 460:	ea00000a 	b	490 <DisplayValue+0x170>
-         bit3 = 0x00; 
-     } 
-     if (bitArray[0] != 0 && bitArray[1] != 0 && bitArray[2] != 0 && bitArray[3] != 0 &&  bitArray[4] != 0) {
-         bit2 =  lookUpTable[bitArray[4]];
-     } else {
-         bit6 = 0x00;
- 464:	e3a03000 	mov	r3, #0
-         bit5 = 0x00;
- 468:	e1a01003 	mov	r1, r3
-         bit4 = 0x00;  
- 46c:	e1a00003 	mov	r0, r3
-         bit3 = 0x00; 
- 470:	e1a0c003 	mov	ip, r3
-         bit2 = 0x00; 
- 474:	e1a04003 	mov	r4, r3
- 478:	ea000004 	b	490 <DisplayValue+0x170>
-         bit3 = 0x00; 
-     } 
-     if (bitArray[0] != 0 && bitArray[1] != 0 && bitArray[2] != 0 && bitArray[3] != 0 &&  bitArray[4] != 0) {
-         bit2 =  lookUpTable[bitArray[4]];
-     } else {
-         bit6 = 0x00;
- 47c:	e3a03000 	mov	r3, #0
-         bit5 = 0x00;
- 480:	e1a01003 	mov	r1, r3
-         bit4 = 0x00;  
- 484:	e1a00003 	mov	r0, r3
-         bit3 = 0x00; 
- 488:	e1a0c003 	mov	ip, r3
-         bit2 = 0x00; 
- 48c:	e1a04003 	mov	r4, r3
-     }
-     bit1 =  lookUpTable[bitArray[5]];
+void DisplayValue(int value) { // max = 10, displays number from 0 - 9
+ 3b8:	e1a0400d 	mov	r4, sp
+  int bit1, bit2, bit3, bit4, bit5, bit6;
+  // if value can be represented by 6 digits
+  int bitArray[6];
+  int i = 5;
+  while (i >= 0) {
+    bitArray[i] = value % 10;
+ 3bc:	e306c667 	movw	ip, #26215	; 0x6667
+ 3c0:	e346c666 	movt	ip, #26214	; 0x6666
+ 3c4:	e0c1309c 	smull	r3, r1, ip, r0
+ 3c8:	e1a03fc0 	asr	r3, r0, #31
+ 3cc:	e0633141 	rsb	r3, r3, r1, asr #2
+ 3d0:	e0831103 	add	r1, r3, r3, lsl #2
+ 3d4:	e0400081 	sub	r0, r0, r1, lsl #1
+ 3d8:	e4020004 	str	r0, [r2], #-4
+    value /= 10;
+ 3dc:	e1a00003 	mov	r0, r3
+  int BYTE = 8;
+  int bit1, bit2, bit3, bit4, bit5, bit6;
+  // if value can be represented by 6 digits
+  int bitArray[6];
+  int i = 5;
+  while (i >= 0) {
+ 3e0:	e1520004 	cmp	r2, r4
+ 3e4:	1afffff6 	bne	3c4 <DisplayValue+0x68>
+    bitArray[i] = value % 10;
+    value /= 10;
+    i--;
+  }
 
-    
-    // Displaying bit 1 - 4 of value 
-    *Display1_ptr = bit4 << (3 * BYTE) |
- 490:	e3002ba8 	movw	r2, #2984	; 0xba8
- 494:	e3402000 	movt	r2, #0
- 498:	e5925000 	ldr	r5, [r2]
-                    bit3 << (2 * BYTE) |
- 49c:	e1a0c80c 	lsl	ip, ip, #16
-     }
-     bit1 =  lookUpTable[bitArray[5]];
+  bit6 = lookUpTable[bitArray[0]];
+ 3e8:	e59d3004 	ldr	r3, [sp, #4]
+ 3ec:	e28d4028 	add	r4, sp, #40	; 0x28
+ 3f0:	e0843003 	add	r3, r4, r3
+ 3f4:	e553100c 	ldrb	r1, [r3, #-12]
+  bit5 = lookUpTable[bitArray[1]];
+ 3f8:	e59d3008 	ldr	r3, [sp, #8]
+ 3fc:	e0843003 	add	r3, r4, r3
+ 400:	e553200c 	ldrb	r2, [r3, #-12]
+  bit3 = lookUpTable[bitArray[3]];
+  bit2 = lookUpTable[bitArray[4]];
+  bit1 = lookUpTable[bitArray[5]];
 
-    
-    // Displaying bit 1 - 4 of value 
-    *Display1_ptr = bit4 << (3 * BYTE) |
- 4a0:	e18c0c00 	orr	r0, ip, r0, lsl #24
-         bit5 = 0x00;
-         bit4 = 0x00;  
-         bit3 = 0x00; 
-         bit2 = 0x00; 
-     }
-     bit1 =  lookUpTable[bitArray[5]];
- 4a4:	e59dc018 	ldr	ip, [sp, #24]
- 4a8:	e28d6028 	add	r6, sp, #40	; 0x28
- 4ac:	e086c00c 	add	ip, r6, ip
- 4b0:	e55c600c 	ldrb	r6, [ip, #-12]
+  // Displaying bit 1 - 4 of value 
+  * Display1_ptr = bit4 << (3 * BYTE) |
+ 404:	e3003ac8 	movw	r3, #2760	; 0xac8
+ 408:	e3403000 	movt	r3, #0
+ 40c:	e5930000 	ldr	r0, [r3]
+    i--;
+  }
 
-    
-    // Displaying bit 1 - 4 of value 
-    *Display1_ptr = bit4 << (3 * BYTE) |
-                    bit3 << (2 * BYTE) |
- 4b4:	e1800006 	orr	r0, r0, r6
-                    bit2 << (1 * BYTE) |
- 4b8:	e1804404 	orr	r4, r0, r4, lsl #8
-     }
-     bit1 =  lookUpTable[bitArray[5]];
+  bit6 = lookUpTable[bitArray[0]];
+  bit5 = lookUpTable[bitArray[1]];
+  bit4 = lookUpTable[bitArray[2]];
+ 410:	e59dc00c 	ldr	ip, [sp, #12]
+ 414:	e084c00c 	add	ip, r4, ip
+ 418:	e55c400c 	ldrb	r4, [ip, #-12]
+  bit3 = lookUpTable[bitArray[3]];
+ 41c:	e59dc010 	ldr	ip, [sp, #16]
+ 420:	e28d5028 	add	r5, sp, #40	; 0x28
+ 424:	e085c00c 	add	ip, r5, ip
+ 428:	e55cc00c 	ldrb	ip, [ip, #-12]
+  bit2 = lookUpTable[bitArray[4]];
+  bit1 = lookUpTable[bitArray[5]];
 
-    
-    // Displaying bit 1 - 4 of value 
-    *Display1_ptr = bit4 << (3 * BYTE) |
- 4bc:	e5854000 	str	r4, [r5]
-                    bit2 << (1 * BYTE) |
-                    bit1 << (0 * BYTE);
+  // Displaying bit 1 - 4 of value 
+  * Display1_ptr = bit4 << (3 * BYTE) |
+    bit3 << (2 * BYTE) |
+ 42c:	e1a0c80c 	lsl	ip, ip, #16
+  bit3 = lookUpTable[bitArray[3]];
+  bit2 = lookUpTable[bitArray[4]];
+  bit1 = lookUpTable[bitArray[5]];
 
+  // Displaying bit 1 - 4 of value 
+  * Display1_ptr = bit4 << (3 * BYTE) |
+ 430:	e18ccc04 	orr	ip, ip, r4, lsl #24
+  bit6 = lookUpTable[bitArray[0]];
+  bit5 = lookUpTable[bitArray[1]];
+  bit4 = lookUpTable[bitArray[2]];
+  bit3 = lookUpTable[bitArray[3]];
+  bit2 = lookUpTable[bitArray[4]];
+  bit1 = lookUpTable[bitArray[5]];
+ 434:	e59d4018 	ldr	r4, [sp, #24]
+ 438:	e0854004 	add	r4, r5, r4
+ 43c:	e554400c 	ldrb	r4, [r4, #-12]
 
-     // Displaying bit 5 - 6 of value 
-    *Display2_ptr = bit6 << (1 * BYTE) |
- 4c0:	e5922004 	ldr	r2, [r2, #4]
- 4c4:	e1813403 	orr	r3, r1, r3, lsl #8
- 4c8:	e5823000 	str	r3, [r2]
- 4cc:	ea000017 	b	530 <DisplayValue+0x210>
-         bit5 = 0x00;
-     }
-     if (bitArray[0] != 0 && bitArray[1] != 0 && bitArray[2] != 0 ) {
-         bit4 =  lookUpTable[bitArray[2]]; 
-     } else {
-         bit6 = 0x00;
- 4d0:	e3a03000 	mov	r3, #0
-         bit5 = 0x00;
- 4d4:	e1a01003 	mov	r1, r3
-         bit4 = 0x00;
- 4d8:	e1a00003 	mov	r0, r3
-     }
-     if (bitArray[0] != 0 && bitArray[1] != 0 && bitArray[2] != 0 && bitArray[3] != 0) {
- 4dc:	e59d200c 	ldr	r2, [sp, #12]
- 4e0:	e3520000 	cmp	r2, #0
- 4e4:	1affffc1 	bne	3f0 <DisplayValue+0xd0>
-         bit3 =  lookUpTable[bitArray[3]];
-     } else {
-         bit6 = 0x00;
- 4e8:	e3a03000 	mov	r3, #0
-         bit5 = 0x00;
- 4ec:	e1a01003 	mov	r1, r3
-         bit4 = 0x00;  
- 4f0:	e1a00003 	mov	r0, r3
-         bit3 = 0x00; 
- 4f4:	e1a0c003 	mov	ip, r3
- 4f8:	ea000003 	b	50c <DisplayValue+0x1ec>
-         bit4 = 0x00;
-     }
-     if (bitArray[0] != 0 && bitArray[1] != 0 && bitArray[2] != 0 && bitArray[3] != 0) {
-         bit3 =  lookUpTable[bitArray[3]];
-     } else {
-         bit6 = 0x00;
- 4fc:	e3a03000 	mov	r3, #0
-         bit5 = 0x00;
- 500:	e1a01003 	mov	r1, r3
-         bit4 = 0x00;  
- 504:	e1a00003 	mov	r0, r3
-         bit3 = 0x00; 
- 508:	e1a0c003 	mov	ip, r3
-     } 
-     if (bitArray[0] != 0 && bitArray[1] != 0 && bitArray[2] != 0 && bitArray[3] != 0 &&  bitArray[4] != 0) {
- 50c:	e59d200c 	ldr	r2, [sp, #12]
- 510:	e3520000 	cmp	r2, #0
- 514:	1affffbc 	bne	40c <DisplayValue+0xec>
-         bit2 =  lookUpTable[bitArray[4]];
-     } else {
-         bit6 = 0x00;
- 518:	e3a03000 	mov	r3, #0
-         bit5 = 0x00;
- 51c:	e1a01003 	mov	r1, r3
-         bit4 = 0x00;  
- 520:	e1a00003 	mov	r0, r3
-         bit3 = 0x00; 
- 524:	e1a0c003 	mov	ip, r3
-         bit2 = 0x00; 
- 528:	e1a04003 	mov	r4, r3
- 52c:	eaffffd7 	b	490 <DisplayValue+0x170>
+  // Displaying bit 1 - 4 of value 
+  * Display1_ptr = bit4 << (3 * BYTE) |
+    bit3 << (2 * BYTE) |
+ 440:	e18cc004 	orr	ip, ip, r4
 
+  bit6 = lookUpTable[bitArray[0]];
+  bit5 = lookUpTable[bitArray[1]];
+  bit4 = lookUpTable[bitArray[2]];
+  bit3 = lookUpTable[bitArray[3]];
+  bit2 = lookUpTable[bitArray[4]];
+ 444:	e59d4014 	ldr	r4, [sp, #20]
+ 448:	e0854004 	add	r4, r5, r4
+ 44c:	e554400c 	ldrb	r4, [r4, #-12]
+  bit1 = lookUpTable[bitArray[5]];
 
-     // Displaying bit 5 - 6 of value 
-    *Display2_ptr = bit6 << (1 * BYTE) |
-                    bit5 << (0 * BYTE);
+  // Displaying bit 1 - 4 of value 
+  * Display1_ptr = bit4 << (3 * BYTE) |
+    bit3 << (2 * BYTE) |
+    bit2 << (1 * BYTE) |
+ 450:	e18cc404 	orr	ip, ip, r4, lsl #8
+  bit3 = lookUpTable[bitArray[3]];
+  bit2 = lookUpTable[bitArray[4]];
+  bit1 = lookUpTable[bitArray[5]];
+
+  // Displaying bit 1 - 4 of value 
+  * Display1_ptr = bit4 << (3 * BYTE) |
+ 454:	e580c000 	str	ip, [r0]
+    bit3 << (2 * BYTE) |
+    bit2 << (1 * BYTE) |
+    bit1 << (0 * BYTE);
+
+  // Displaying bit 5 - 6 of value 
+  * Display2_ptr = bit6 << (1 * BYTE) |
+ 458:	e5933004 	ldr	r3, [r3, #4]
+ 45c:	e1822401 	orr	r2, r2, r1, lsl #8
+ 460:	e5832000 	str	r2, [r3]
+    bit5 << (0 * BYTE);
 }
- 530:	e28dd02c 	add	sp, sp, #44	; 0x2c
- 534:	e8bd0070 	pop	{r4, r5, r6}
- 538:	e12fff1e 	bx	lr
+ 464:	e28dd028 	add	sp, sp, #40	; 0x28
+ 468:	e8bd0030 	pop	{r4, r5}
+ 46c:	e12fff1e 	bx	lr
 
-0000053c <ReadSwitches>:
+00000470 <ReadSwitches>:
 
 // Reads switches
-int ReadSwitches(void)
-{
+int ReadSwitches(void){
     volatile int *SW_ptr = (int *)SW_BASE;
     return (*(SW_ptr));
- 53c:	e3a03000 	mov	r3, #0
- 540:	e34f3f20 	movt	r3, #65312	; 0xff20
- 544:	e5930040 	ldr	r0, [r3, #64]	; 0x40
+ 470:	e3a03000 	mov	r3, #0
+ 474:	e34f3f20 	movt	r3, #65312	; 0xff20
+ 478:	e5930040 	ldr	r0, [r3, #64]	; 0x40
 }
- 548:	e12fff1e 	bx	lr
+ 47c:	e12fff1e 	bx	lr
 
-0000054c <ReadButton>:
+00000480 <ReadButton>:
+
 // Reads buttons
-int ReadButton(int btn)
-{
-    volatile int *BTN_ptr = (int *)KEY_BASE;
-    // Returns 1 if the given button is pressed, 0 otherwise due to & operator
-    return ((*BTN_ptr >> (btn)) & 1);
- 54c:	e3a03000 	mov	r3, #0
- 550:	e34f3f20 	movt	r3, #65312	; 0xff20
- 554:	e5933050 	ldr	r3, [r3, #80]	; 0x50
- 558:	e1a00053 	asr	r0, r3, r0
+int ReadButton(int btn) {
+  volatile int * BTN_ptr = (int * ) KEY_BASE;
+  // Returns 1 if the given button is pressed, 0 otherwise due to & operator
+  return (( * BTN_ptr >> (btn)) & 1);
+ 480:	e3a03000 	mov	r3, #0
+ 484:	e34f3f20 	movt	r3, #65312	; 0xff20
+ 488:	e5933050 	ldr	r3, [r3, #80]	; 0x50
+ 48c:	e1a00053 	asr	r0, r3, r0
 }
- 55c:	e2000001 	and	r0, r0, #1
- 560:	e12fff1e 	bx	lr
+ 490:	e2000001 	and	r0, r0, #1
+ 494:	e12fff1e 	bx	lr
 
-00000564 <GetInput>:
+00000498 <GetInput>:
+
 // get input from switch 0 - 5
-int GetInput(void)
-{
-    // pointer to switch address
-    volatile int *SW_ptr = (int *)SW_BASE;
-    int inputValue = *(SW_ptr);
- 564:	e3a03000 	mov	r3, #0
- 568:	e34f3f20 	movt	r3, #65312	; 0xff20
- 56c:	e5932040 	ldr	r2, [r3, #64]	; 0x40
-    // reads slide switch bank and return current value (encoded in binary)
-    // return lowest 6 bits in the switch bank (2 ^ 6)
-    return (inputValue % (2 * 2 * 2 * 2 * 2 * 2));
- 570:	e1a03fc2 	asr	r3, r2, #31
- 574:	e1a03d23 	lsr	r3, r3, #26
- 578:	e0822003 	add	r2, r2, r3
- 57c:	e202003f 	and	r0, r2, #63	; 0x3f
+int GetInput(void) {
+ 498:	e24dd008 	sub	sp, sp, #8
+  // pointer to switch address
+  volatile int * SW_ptr = (int * ) SW_BASE;
+  volatile int inputValue = * (SW_ptr);
+ 49c:	e3a03000 	mov	r3, #0
+ 4a0:	e34f3f20 	movt	r3, #65312	; 0xff20
+ 4a4:	e5933040 	ldr	r3, [r3, #64]	; 0x40
+ 4a8:	e58d3004 	str	r3, [sp, #4]
+  // reads slide switch bank and return current value (encoded in binary)
+  // return lowest 6 bits in the switch bank (2 ^ 6)
+  return (inputValue % (2 * 2 * 2 * 2 * 2 * 2));
+ 4ac:	e59d2004 	ldr	r2, [sp, #4]
+ 4b0:	e1a03fc2 	asr	r3, r2, #31
+ 4b4:	e1a03d23 	lsr	r3, r3, #26
+ 4b8:	e0822003 	add	r2, r2, r3
+ 4bc:	e202003f 	and	r0, r2, #63	; 0x3f
 }
- 580:	e0630000 	rsb	r0, r3, r0
- 584:	e12fff1e 	bx	lr
+ 4c0:	e0630000 	rsb	r0, r3, r0
+ 4c4:	e28dd008 	add	sp, sp, #8
+ 4c8:	e12fff1e 	bx	lr
 
-00000588 <main>:
+000004cc <main>:
 
 
-int main(void)
-{
- 588:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
-            DisplayValue(GetInput());
-        } else {
+
+int answer;
+
+int main(void) {
+ 4cc:	e92d45f8 	push	{r3, r4, r5, r6, r7, r8, sl, lr}
+
+  DisplayValue(0); // Initialize display
+ 4d0:	e3a00000 	mov	r0, #0
+ 4d4:	ebffffa0 	bl	35c <DisplayValue>
+  // Main loop
+  while (1) {
+   
+
+    // plus
+    if (ReadButton(0) && !ReadButton(1) && !ReadButton(3) && !ReadButton(3)) {
+ 4d8:	e3a04000 	mov	r4, #0
+ 4dc:	e3a05001 	mov	r5, #1
+ 4e0:	e3a07003 	mov	r7, #3
+      DisplayOperator(1);
+    }
+    // minus
+    if (!ReadButton(0) && ReadButton(1) && !ReadButton(2) && !ReadButton(3)) {
+ 4e4:	e3a06002 	mov	r6, #2
+    if (!ReadButton(0) && !ReadButton(1) && ReadButton(2) && !ReadButton(3)) {
+      DisplayOperator(3);
+    }
+    //divide
+    if (!ReadButton(0) && !ReadButton(1) && !ReadButton(2) && ReadButton(3)) {
+      DisplayOperator(4);
+ 4e8:	e3a0a004 	mov	sl, #4
+    // }
+
+    // If first switch is on, display lap time
+    if (ReadSwitches() == 6)
+    {
+        DisplayValue(123);
+ 4ec:	e3a0807b 	mov	r8, #123	; 0x7b
+  // Main loop
+  while (1) {
+   
+
+    // plus
+    if (ReadButton(0) && !ReadButton(1) && !ReadButton(3) && !ReadButton(3)) {
+ 4f0:	e1a00004 	mov	r0, r4
+ 4f4:	ebffffe1 	bl	480 <ReadButton>
+ 4f8:	e3500000 	cmp	r0, #0
+ 4fc:	0a00000d 	beq	538 <main+0x6c>
+ 500:	e1a00005 	mov	r0, r5
+ 504:	ebffffdd 	bl	480 <ReadButton>
+ 508:	e3500000 	cmp	r0, #0
+ 50c:	1a000009 	bne	538 <main+0x6c>
+ 510:	e1a00007 	mov	r0, r7
+ 514:	ebffffd9 	bl	480 <ReadButton>
+ 518:	e3500000 	cmp	r0, #0
+ 51c:	1a000005 	bne	538 <main+0x6c>
+ 520:	e1a00007 	mov	r0, r7
+ 524:	ebffffd5 	bl	480 <ReadButton>
+ 528:	e3500000 	cmp	r0, #0
+ 52c:	1a000001 	bne	538 <main+0x6c>
+      DisplayOperator(1);
+ 530:	e1a00005 	mov	r0, r5
+ 534:	ebffff6e 	bl	2f4 <DisplayOperator>
+    }
+    // minus
+    if (!ReadButton(0) && ReadButton(1) && !ReadButton(2) && !ReadButton(3)) {
+ 538:	e1a00004 	mov	r0, r4
+ 53c:	ebffffcf 	bl	480 <ReadButton>
+ 540:	e3500000 	cmp	r0, #0
+ 544:	1a00000d 	bne	580 <main+0xb4>
+ 548:	e1a00005 	mov	r0, r5
+ 54c:	ebffffcb 	bl	480 <ReadButton>
+ 550:	e3500000 	cmp	r0, #0
+ 554:	0a000009 	beq	580 <main+0xb4>
+ 558:	e1a00006 	mov	r0, r6
+ 55c:	ebffffc7 	bl	480 <ReadButton>
+ 560:	e3500000 	cmp	r0, #0
+ 564:	1a000005 	bne	580 <main+0xb4>
+ 568:	e1a00007 	mov	r0, r7
+ 56c:	ebffffc3 	bl	480 <ReadButton>
+ 570:	e3500000 	cmp	r0, #0
+ 574:	1a000001 	bne	580 <main+0xb4>
+      DisplayOperator(2);
+ 578:	e1a00006 	mov	r0, r6
+ 57c:	ebffff5c 	bl	2f4 <DisplayOperator>
+    }
+    // multiply
+    if (!ReadButton(0) && !ReadButton(1) && ReadButton(2) && !ReadButton(3)) {
+ 580:	e1a00004 	mov	r0, r4
+ 584:	ebffffbd 	bl	480 <ReadButton>
+ 588:	e3500000 	cmp	r0, #0
+ 58c:	1a00000d 	bne	5c8 <main+0xfc>
+ 590:	e1a00005 	mov	r0, r5
+ 594:	ebffffb9 	bl	480 <ReadButton>
+ 598:	e3500000 	cmp	r0, #0
+ 59c:	1a000009 	bne	5c8 <main+0xfc>
+ 5a0:	e1a00006 	mov	r0, r6
+ 5a4:	ebffffb5 	bl	480 <ReadButton>
+ 5a8:	e3500000 	cmp	r0, #0
+ 5ac:	0a000005 	beq	5c8 <main+0xfc>
+ 5b0:	e1a00007 	mov	r0, r7
+ 5b4:	ebffffb1 	bl	480 <ReadButton>
+ 5b8:	e3500000 	cmp	r0, #0
+ 5bc:	1a000001 	bne	5c8 <main+0xfc>
+      DisplayOperator(3);
+ 5c0:	e1a00007 	mov	r0, r7
+ 5c4:	ebffff4a 	bl	2f4 <DisplayOperator>
+    }
+    //divide
+    if (!ReadButton(0) && !ReadButton(1) && !ReadButton(2) && ReadButton(3)) {
+ 5c8:	e1a00004 	mov	r0, r4
+ 5cc:	ebffffab 	bl	480 <ReadButton>
+ 5d0:	e3500000 	cmp	r0, #0
+ 5d4:	1a00000d 	bne	610 <main+0x144>
+ 5d8:	e1a00005 	mov	r0, r5
+ 5dc:	ebffffa7 	bl	480 <ReadButton>
+ 5e0:	e3500000 	cmp	r0, #0
+ 5e4:	1a000009 	bne	610 <main+0x144>
+ 5e8:	e1a00006 	mov	r0, r6
+ 5ec:	ebffffa3 	bl	480 <ReadButton>
+ 5f0:	e3500000 	cmp	r0, #0
+ 5f4:	1a000005 	bne	610 <main+0x144>
+ 5f8:	e1a00007 	mov	r0, r7
+ 5fc:	ebffff9f 	bl	480 <ReadButton>
+ 600:	e3500000 	cmp	r0, #0
+ 604:	0a000001 	beq	610 <main+0x144>
+      DisplayOperator(4);
+ 608:	e1a0000a 	mov	r0, sl
+ 60c:	ebffff38 	bl	2f4 <DisplayOperator>
+    // else if (ReadSwitches() == 8) {
+
+    // }
+
+    // If first switch is on, display lap time
+    if (ReadSwitches() == 6)
+ 610:	ebffff96 	bl	470 <ReadSwitches>
+ 614:	e3500006 	cmp	r0, #6
+ 618:	1a000002 	bne	628 <main+0x15c>
+    {
+        DisplayValue(123);
+ 61c:	e1a00008 	mov	r0, r8
+ 620:	ebffff4d 	bl	35c <DisplayValue>
+ 624:	eaffffb1 	b	4f0 <main+0x24>
+    } else // Otherwise, display current stopwatch time
+    {
         DisplayError();
-        }
-        // plus
-        if (ReadButton(0) && !ReadButton(1) && !ReadButton(3) && !ReadButton(3))
- 58c:	e3a04000 	mov	r4, #0
- 590:	e3a05001 	mov	r5, #1
- 594:	e3a07003 	mov	r7, #3
-        {
-           DisplayOperator(1);
-        }
-        // minus
-        if (!ReadButton(0) && ReadButton(1) && !ReadButton(2) && !ReadButton(3))
- 598:	e3a06002 	mov	r6, #2
-            DisplayOperator(3);
-        }
-        //divide
-        if (!ReadButton(0) && !ReadButton(1) && !ReadButton(2) && ReadButton(3))
-        {
-            DisplayOperator(4);
- 59c:	e3a08004 	mov	r8, #4
+ 628:	ebffff27 	bl	2cc <DisplayError>
+ 62c:	eaffffaf 	b	4f0 <main+0x24>
 
+00000630 <atexit>:
+ 630:	e1a01000 	mov	r1, r0
+ 634:	e3a00000 	mov	r0, #0
+ 638:	e92d4008 	push	{r3, lr}
+ 63c:	e1a02000 	mov	r2, r0
+ 640:	e1a03000 	mov	r3, r0
+ 644:	eb00000e 	bl	684 <__register_exitproc>
+ 648:	e8bd4008 	pop	{r3, lr}
+ 64c:	e12fff1e 	bx	lr
 
-    // Main loop
-    while (1)
-    {   
-        if (countDigit(GetInput()) <= 6) {
- 5a0:	ebffffef 	bl	564 <GetInput>
- 5a4:	ebffff2c 	bl	25c <countDigit>
- 5a8:	e3500006 	cmp	r0, #6
- 5ac:	ca000002 	bgt	5bc <main+0x34>
-            DisplayValue(GetInput());
- 5b0:	ebffffeb 	bl	564 <GetInput>
- 5b4:	ebffff59 	bl	320 <DisplayValue>
- 5b8:	ea000000 	b	5c0 <main+0x38>
-        } else {
-        DisplayError();
- 5bc:	ebffff33 	bl	290 <DisplayError>
-        }
-        // plus
-        if (ReadButton(0) && !ReadButton(1) && !ReadButton(3) && !ReadButton(3))
- 5c0:	e1a00004 	mov	r0, r4
- 5c4:	ebffffe0 	bl	54c <ReadButton>
- 5c8:	e3500000 	cmp	r0, #0
- 5cc:	0a00000d 	beq	608 <main+0x80>
- 5d0:	e1a00005 	mov	r0, r5
- 5d4:	ebffffdc 	bl	54c <ReadButton>
- 5d8:	e3500000 	cmp	r0, #0
- 5dc:	1a000009 	bne	608 <main+0x80>
- 5e0:	e1a00007 	mov	r0, r7
- 5e4:	ebffffd8 	bl	54c <ReadButton>
- 5e8:	e3500000 	cmp	r0, #0
- 5ec:	1a000005 	bne	608 <main+0x80>
- 5f0:	e1a00007 	mov	r0, r7
- 5f4:	ebffffd4 	bl	54c <ReadButton>
- 5f8:	e3500000 	cmp	r0, #0
- 5fc:	1a000001 	bne	608 <main+0x80>
-        {
-           DisplayOperator(1);
- 600:	e1a00005 	mov	r0, r5
- 604:	ebffff2b 	bl	2b8 <DisplayOperator>
-        }
-        // minus
-        if (!ReadButton(0) && ReadButton(1) && !ReadButton(2) && !ReadButton(3))
- 608:	e1a00004 	mov	r0, r4
- 60c:	ebffffce 	bl	54c <ReadButton>
- 610:	e3500000 	cmp	r0, #0
- 614:	1a00000d 	bne	650 <main+0xc8>
- 618:	e1a00005 	mov	r0, r5
- 61c:	ebffffca 	bl	54c <ReadButton>
- 620:	e3500000 	cmp	r0, #0
- 624:	0a000009 	beq	650 <main+0xc8>
- 628:	e1a00006 	mov	r0, r6
- 62c:	ebffffc6 	bl	54c <ReadButton>
- 630:	e3500000 	cmp	r0, #0
- 634:	1a000005 	bne	650 <main+0xc8>
- 638:	e1a00007 	mov	r0, r7
- 63c:	ebffffc2 	bl	54c <ReadButton>
- 640:	e3500000 	cmp	r0, #0
- 644:	1a000001 	bne	650 <main+0xc8>
-        {
-            DisplayOperator(2);
- 648:	e1a00006 	mov	r0, r6
- 64c:	ebffff19 	bl	2b8 <DisplayOperator>
-        }
-        // multiply
-        if (!ReadButton(0) && !ReadButton(1) && ReadButton(2) && !ReadButton(3))
- 650:	e1a00004 	mov	r0, r4
- 654:	ebffffbc 	bl	54c <ReadButton>
- 658:	e3500000 	cmp	r0, #0
- 65c:	1a00000d 	bne	698 <main+0x110>
- 660:	e1a00005 	mov	r0, r5
- 664:	ebffffb8 	bl	54c <ReadButton>
- 668:	e3500000 	cmp	r0, #0
- 66c:	1a000009 	bne	698 <main+0x110>
- 670:	e1a00006 	mov	r0, r6
- 674:	ebffffb4 	bl	54c <ReadButton>
- 678:	e3500000 	cmp	r0, #0
- 67c:	0a000005 	beq	698 <main+0x110>
- 680:	e1a00007 	mov	r0, r7
- 684:	ebffffb0 	bl	54c <ReadButton>
- 688:	e3500000 	cmp	r0, #0
- 68c:	1a000001 	bne	698 <main+0x110>
-        {
-            DisplayOperator(3);
- 690:	e1a00007 	mov	r0, r7
- 694:	ebffff07 	bl	2b8 <DisplayOperator>
-        }
-        //divide
-        if (!ReadButton(0) && !ReadButton(1) && !ReadButton(2) && ReadButton(3))
- 698:	e1a00004 	mov	r0, r4
- 69c:	ebffffaa 	bl	54c <ReadButton>
- 6a0:	e3500000 	cmp	r0, #0
- 6a4:	1a00000d 	bne	6e0 <main+0x158>
- 6a8:	e1a00005 	mov	r0, r5
- 6ac:	ebffffa6 	bl	54c <ReadButton>
- 6b0:	e3500000 	cmp	r0, #0
- 6b4:	1a000009 	bne	6e0 <main+0x158>
- 6b8:	e1a00006 	mov	r0, r6
- 6bc:	ebffffa2 	bl	54c <ReadButton>
- 6c0:	e3500000 	cmp	r0, #0
- 6c4:	1a000005 	bne	6e0 <main+0x158>
- 6c8:	e1a00007 	mov	r0, r7
- 6cc:	ebffff9e 	bl	54c <ReadButton>
- 6d0:	e3500000 	cmp	r0, #0
- 6d4:	0a000001 	beq	6e0 <main+0x158>
-        {
-            DisplayOperator(4);
- 6d8:	e1a00008 	mov	r0, r8
- 6dc:	ebfffef5 	bl	2b8 <DisplayOperator>
-        }
+00000650 <exit>:
+ 650:	e92d4008 	push	{r3, lr}
+ 654:	e3a01000 	mov	r1, #0
+ 658:	e1a04000 	mov	r4, r0
+ 65c:	eb000045 	bl	778 <__call_exitprocs>
+ 660:	e59f3018 	ldr	r3, [pc, #24]	; 680 <exit+0x30>
+ 664:	e5930000 	ldr	r0, [r3]
+ 668:	e590303c 	ldr	r3, [r0, #60]	; 0x3c
+ 66c:	e3530000 	cmp	r3, #0
+ 670:	11a0e00f 	movne	lr, pc
+ 674:	112fff13 	bxne	r3
+ 678:	e1a00004 	mov	r0, r4
+ 67c:	eb0000c9 	bl	9a8 <_exit>
+ 680:	00000a68 	.word	0x00000a68
 
+00000684 <__register_exitproc>:
+ 684:	e59fc0e4 	ldr	ip, [pc, #228]	; 770 <__register_exitproc+0xec>
+ 688:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
+ 68c:	e59c4000 	ldr	r4, [ip]
+ 690:	e594c148 	ldr	ip, [r4, #328]	; 0x148
+ 694:	e35c0000 	cmp	ip, #0
+ 698:	0284cf53 	addeq	ip, r4, #332	; 0x14c
+ 69c:	e59c5004 	ldr	r5, [ip, #4]
+ 6a0:	0584c148 	streq	ip, [r4, #328]	; 0x148
+ 6a4:	e355001f 	cmp	r5, #31
+ 6a8:	e24dd010 	sub	sp, sp, #16
+ 6ac:	e1a06000 	mov	r6, r0
+ 6b0:	da000015 	ble	70c <__register_exitproc+0x88>
+ 6b4:	e59f00b8 	ldr	r0, [pc, #184]	; 774 <__register_exitproc+0xf0>
+ 6b8:	e3500000 	cmp	r0, #0
+ 6bc:	1a000001 	bne	6c8 <__register_exitproc+0x44>
+ 6c0:	e3e00000 	mvn	r0, #0
+ 6c4:	ea000018 	b	72c <__register_exitproc+0xa8>
+ 6c8:	e3a00e19 	mov	r0, #400	; 0x190
+ 6cc:	e58d100c 	str	r1, [sp, #12]
+ 6d0:	e58d2008 	str	r2, [sp, #8]
+ 6d4:	e58d3004 	str	r3, [sp, #4]
+ 6d8:	e320f000 	nop	{0}
+ 6dc:	e250c000 	subs	ip, r0, #0
+ 6e0:	e59d100c 	ldr	r1, [sp, #12]
+ 6e4:	e59d2008 	ldr	r2, [sp, #8]
+ 6e8:	e59d3004 	ldr	r3, [sp, #4]
+ 6ec:	0afffff3 	beq	6c0 <__register_exitproc+0x3c>
+ 6f0:	e5945148 	ldr	r5, [r4, #328]	; 0x148
+ 6f4:	e3a00000 	mov	r0, #0
+ 6f8:	e58c0004 	str	r0, [ip, #4]
+ 6fc:	e58c5000 	str	r5, [ip]
+ 700:	e584c148 	str	ip, [r4, #328]	; 0x148
+ 704:	e58c0188 	str	r0, [ip, #392]	; 0x188
+ 708:	e58c018c 	str	r0, [ip, #396]	; 0x18c
+ 70c:	e3560000 	cmp	r6, #0
+ 710:	e59c4004 	ldr	r4, [ip, #4]
+ 714:	1a000007 	bne	738 <__register_exitproc+0xb4>
+ 718:	e2843002 	add	r3, r4, #2
+ 71c:	e2844001 	add	r4, r4, #1
+ 720:	e78c1103 	str	r1, [ip, r3, lsl #2]
+ 724:	e58c4004 	str	r4, [ip, #4]
+ 728:	e3a00000 	mov	r0, #0
+ 72c:	e28dd010 	add	sp, sp, #16
+ 730:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
+ 734:	e12fff1e 	bx	lr
+ 738:	e3a00001 	mov	r0, #1
+ 73c:	e1a00410 	lsl	r0, r0, r4
+ 740:	e08c8104 	add	r8, ip, r4, lsl #2
+ 744:	e3560002 	cmp	r6, #2
+ 748:	e59c7188 	ldr	r7, [ip, #392]	; 0x188
+ 74c:	e5883108 	str	r3, [r8, #264]	; 0x108
+ 750:	059c318c 	ldreq	r3, [ip, #396]	; 0x18c
+ 754:	e1877000 	orr	r7, r7, r0
+ 758:	01830000 	orreq	r0, r3, r0
+ 75c:	e1a05008 	mov	r5, r8
+ 760:	e5882088 	str	r2, [r8, #136]	; 0x88
+ 764:	e58c7188 	str	r7, [ip, #392]	; 0x188
+ 768:	058c018c 	streq	r0, [ip, #396]	; 0x18c
+ 76c:	eaffffe9 	b	718 <__register_exitproc+0x94>
+ 770:	00000a68 	.word	0x00000a68
+ 774:	00000000 	.word	0x00000000
 
-        // on / off 
-        if (ReadSwitches() == 10)
- 6e0:	ebffff95 	bl	53c <ReadSwitches>
- 6e4:	e350000a 	cmp	r0, #10
- 6e8:	0affffac 	beq	5a0 <main+0x18>
-        {
-            
-        }
+00000778 <__call_exitprocs>:
+ 778:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 77c:	e59f3168 	ldr	r3, [pc, #360]	; 8ec <__call_exitprocs+0x174>
+ 780:	e5933000 	ldr	r3, [r3]
+ 784:	e24dd014 	sub	sp, sp, #20
+ 788:	e58d3004 	str	r3, [sp, #4]
+ 78c:	e2833f52 	add	r3, r3, #328	; 0x148
+ 790:	e58d0008 	str	r0, [sp, #8]
+ 794:	e58d300c 	str	r3, [sp, #12]
+ 798:	e1a07001 	mov	r7, r1
+ 79c:	e3a08001 	mov	r8, #1
+ 7a0:	e59d3004 	ldr	r3, [sp, #4]
+ 7a4:	e5936148 	ldr	r6, [r3, #328]	; 0x148
+ 7a8:	e3560000 	cmp	r6, #0
+ 7ac:	e59db00c 	ldr	fp, [sp, #12]
+ 7b0:	0a000033 	beq	884 <__call_exitprocs+0x10c>
+ 7b4:	e5965004 	ldr	r5, [r6, #4]
+ 7b8:	e2554001 	subs	r4, r5, #1
+ 7bc:	5286a088 	addpl	sl, r6, #136	; 0x88
+ 7c0:	5285501f 	addpl	r5, r5, #31
+ 7c4:	508a5105 	addpl	r5, sl, r5, lsl #2
+ 7c8:	5a000007 	bpl	7ec <__call_exitprocs+0x74>
+ 7cc:	ea000029 	b	878 <__call_exitprocs+0x100>
+ 7d0:	e5953000 	ldr	r3, [r5]
+ 7d4:	e1530007 	cmp	r3, r7
+ 7d8:	0a000005 	beq	7f4 <__call_exitprocs+0x7c>
+ 7dc:	e2444001 	sub	r4, r4, #1
+ 7e0:	e3740001 	cmn	r4, #1
+ 7e4:	e2455004 	sub	r5, r5, #4
+ 7e8:	0a000022 	beq	878 <__call_exitprocs+0x100>
+ 7ec:	e3570000 	cmp	r7, #0
+ 7f0:	1afffff6 	bne	7d0 <__call_exitprocs+0x58>
+ 7f4:	e5963004 	ldr	r3, [r6, #4]
+ 7f8:	e06a2005 	rsb	r2, sl, r5
+ 7fc:	e2433001 	sub	r3, r3, #1
+ 800:	e0862002 	add	r2, r6, r2
+ 804:	e1530004 	cmp	r3, r4
+ 808:	e5123078 	ldr	r3, [r2, #-120]	; 0xffffff88
+ 80c:	13a01000 	movne	r1, #0
+ 810:	05864004 	streq	r4, [r6, #4]
+ 814:	15021078 	strne	r1, [r2, #-120]	; 0xffffff88
+ 818:	e3530000 	cmp	r3, #0
+ 81c:	0affffee 	beq	7dc <__call_exitprocs+0x64>
+ 820:	e1a02418 	lsl	r2, r8, r4
+ 824:	e5961188 	ldr	r1, [r6, #392]	; 0x188
+ 828:	e1120001 	tst	r2, r1
+ 82c:	e5969004 	ldr	r9, [r6, #4]
+ 830:	0a000016 	beq	890 <__call_exitprocs+0x118>
+ 834:	e596118c 	ldr	r1, [r6, #396]	; 0x18c
+ 838:	e1120001 	tst	r2, r1
+ 83c:	1a000016 	bne	89c <__call_exitprocs+0x124>
+ 840:	e59d0008 	ldr	r0, [sp, #8]
+ 844:	e5151080 	ldr	r1, [r5, #-128]	; 0xffffff80
+ 848:	e1a0e00f 	mov	lr, pc
+ 84c:	e12fff13 	bx	r3
+ 850:	e5963004 	ldr	r3, [r6, #4]
+ 854:	e1530009 	cmp	r3, r9
+ 858:	1affffd0 	bne	7a0 <__call_exitprocs+0x28>
+ 85c:	e59b3000 	ldr	r3, [fp]
+ 860:	e1530006 	cmp	r3, r6
+ 864:	1affffcd 	bne	7a0 <__call_exitprocs+0x28>
+ 868:	e2444001 	sub	r4, r4, #1
+ 86c:	e3740001 	cmn	r4, #1
+ 870:	e2455004 	sub	r5, r5, #4
+ 874:	1affffdc 	bne	7ec <__call_exitprocs+0x74>
+ 878:	e59f1070 	ldr	r1, [pc, #112]	; 8f0 <__call_exitprocs+0x178>
+ 87c:	e3510000 	cmp	r1, #0
+ 880:	1a000009 	bne	8ac <__call_exitprocs+0x134>
+ 884:	e28dd014 	add	sp, sp, #20
+ 888:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
+ 88c:	e12fff1e 	bx	lr
+ 890:	e1a0e00f 	mov	lr, pc
+ 894:	e12fff13 	bx	r3
+ 898:	eaffffec 	b	850 <__call_exitprocs+0xd8>
+ 89c:	e5150080 	ldr	r0, [r5, #-128]	; 0xffffff80
+ 8a0:	e1a0e00f 	mov	lr, pc
+ 8a4:	e12fff13 	bx	r3
+ 8a8:	eaffffe8 	b	850 <__call_exitprocs+0xd8>
+ 8ac:	e5963004 	ldr	r3, [r6, #4]
+ 8b0:	e3530000 	cmp	r3, #0
+ 8b4:	e5963000 	ldr	r3, [r6]
+ 8b8:	1a000008 	bne	8e0 <__call_exitprocs+0x168>
+ 8bc:	e3530000 	cmp	r3, #0
+ 8c0:	0a000006 	beq	8e0 <__call_exitprocs+0x168>
+ 8c4:	e1a00006 	mov	r0, r6
+ 8c8:	e58b3000 	str	r3, [fp]
+ 8cc:	e320f000 	nop	{0}
+ 8d0:	e59b6000 	ldr	r6, [fp]
+ 8d4:	e3560000 	cmp	r6, #0
+ 8d8:	1affffb5 	bne	7b4 <__call_exitprocs+0x3c>
+ 8dc:	eaffffe8 	b	884 <__call_exitprocs+0x10c>
+ 8e0:	e1a0b006 	mov	fp, r6
+ 8e4:	e1a06003 	mov	r6, r3
+ 8e8:	eafffff9 	b	8d4 <__call_exitprocs+0x15c>
+ 8ec:	00000a68 	.word	0x00000a68
+ 8f0:	00000000 	.word	0x00000000
 
-        // clear
-        else if (ReadSwitches() == 9){
- 6ec:	ebffff92 	bl	53c <ReadSwitches>
- 6f0:	e3500009 	cmp	r0, #9
- 6f4:	0affffa9 	beq	5a0 <main+0x18>
-            
-        }
+000008f4 <register_fini>:
+ 8f4:	e92d4008 	push	{r3, lr}
+ 8f8:	e59f3010 	ldr	r3, [pc, #16]	; 910 <register_fini+0x1c>
+ 8fc:	e3530000 	cmp	r3, #0
+ 900:	159f000c 	ldrne	r0, [pc, #12]	; 914 <register_fini+0x20>
+ 904:	1bffff49 	blne	630 <atexit>
+ 908:	e8bd4008 	pop	{r3, lr}
+ 90c:	e12fff1e 	bx	lr
+ 910:	00000a90 	.word	0x00000a90
+ 914:	00000918 	.word	0x00000918
 
-        // show answer
-        else if (ReadSwitches() == 8){
- 6f8:	ebffff8f 	bl	53c <ReadSwitches>
- 6fc:	e3500008 	cmp	r0, #8
- 700:	0affffa6 	beq	5a0 <main+0x18>
-            
-        }
+00000918 <__libc_fini_array>:
+ 918:	e92d4038 	push	{r3, r4, r5, lr}
+ 91c:	e59f5030 	ldr	r5, [pc, #48]	; 954 <__libc_fini_array+0x3c>
+ 920:	e59f4030 	ldr	r4, [pc, #48]	; 958 <__libc_fini_array+0x40>
+ 924:	e0654004 	rsb	r4, r5, r4
+ 928:	e1b04144 	asrs	r4, r4, #2
+ 92c:	10855104 	addne	r5, r5, r4, lsl #2
+ 930:	0a000004 	beq	948 <__libc_fini_array+0x30>
+ 934:	e5353004 	ldr	r3, [r5, #-4]!
+ 938:	e1a0e00f 	mov	lr, pc
+ 93c:	e12fff13 	bx	r3
+ 940:	e2544001 	subs	r4, r4, #1
+ 944:	1afffffa 	bne	934 <__libc_fini_array+0x1c>
+ 948:	eb000050 	bl	a90 <__libc_fini>
+ 94c:	e8bd4038 	pop	{r3, r4, r5, lr}
+ 950:	e12fff1e 	bx	lr
+ 954:	00000aa8 	.word	0x00000aa8
+ 958:	00000aac 	.word	0x00000aac
 
-        // switch mode
-        else if (ReadSwitches() == 7){
- 704:	ebffff8c 	bl	53c <ReadSwitches>
- 708:	eaffffa4 	b	5a0 <main+0x18>
-
-0000070c <atexit>:
- 70c:	e1a01000 	mov	r1, r0
- 710:	e3a00000 	mov	r0, #0
- 714:	e92d4008 	push	{r3, lr}
- 718:	e1a02000 	mov	r2, r0
- 71c:	e1a03000 	mov	r3, r0
- 720:	eb00000e 	bl	760 <__register_exitproc>
- 724:	e8bd4008 	pop	{r3, lr}
- 728:	e12fff1e 	bx	lr
-
-0000072c <exit>:
- 72c:	e92d4008 	push	{r3, lr}
- 730:	e3a01000 	mov	r1, #0
- 734:	e1a04000 	mov	r4, r0
- 738:	eb000045 	bl	854 <__call_exitprocs>
- 73c:	e59f3018 	ldr	r3, [pc, #24]	; 75c <exit+0x30>
- 740:	e5930000 	ldr	r0, [r3]
- 744:	e590303c 	ldr	r3, [r0, #60]	; 0x3c
- 748:	e3530000 	cmp	r3, #0
- 74c:	11a0e00f 	movne	lr, pc
- 750:	112fff13 	bxne	r3
- 754:	e1a00004 	mov	r0, r4
- 758:	eb0000c9 	bl	a84 <_exit>
- 75c:	00000b44 	.word	0x00000b44
-
-00000760 <__register_exitproc>:
- 760:	e59fc0e4 	ldr	ip, [pc, #228]	; 84c <__register_exitproc+0xec>
- 764:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
- 768:	e59c4000 	ldr	r4, [ip]
- 76c:	e594c148 	ldr	ip, [r4, #328]	; 0x148
- 770:	e35c0000 	cmp	ip, #0
- 774:	0284cf53 	addeq	ip, r4, #332	; 0x14c
- 778:	e59c5004 	ldr	r5, [ip, #4]
- 77c:	0584c148 	streq	ip, [r4, #328]	; 0x148
- 780:	e355001f 	cmp	r5, #31
- 784:	e24dd010 	sub	sp, sp, #16
- 788:	e1a06000 	mov	r6, r0
- 78c:	da000015 	ble	7e8 <__register_exitproc+0x88>
- 790:	e59f00b8 	ldr	r0, [pc, #184]	; 850 <__register_exitproc+0xf0>
- 794:	e3500000 	cmp	r0, #0
- 798:	1a000001 	bne	7a4 <__register_exitproc+0x44>
- 79c:	e3e00000 	mvn	r0, #0
- 7a0:	ea000018 	b	808 <__register_exitproc+0xa8>
- 7a4:	e3a00e19 	mov	r0, #400	; 0x190
- 7a8:	e58d100c 	str	r1, [sp, #12]
- 7ac:	e58d2008 	str	r2, [sp, #8]
- 7b0:	e58d3004 	str	r3, [sp, #4]
- 7b4:	e320f000 	nop	{0}
- 7b8:	e250c000 	subs	ip, r0, #0
- 7bc:	e59d100c 	ldr	r1, [sp, #12]
- 7c0:	e59d2008 	ldr	r2, [sp, #8]
- 7c4:	e59d3004 	ldr	r3, [sp, #4]
- 7c8:	0afffff3 	beq	79c <__register_exitproc+0x3c>
- 7cc:	e5945148 	ldr	r5, [r4, #328]	; 0x148
- 7d0:	e3a00000 	mov	r0, #0
- 7d4:	e58c0004 	str	r0, [ip, #4]
- 7d8:	e58c5000 	str	r5, [ip]
- 7dc:	e584c148 	str	ip, [r4, #328]	; 0x148
- 7e0:	e58c0188 	str	r0, [ip, #392]	; 0x188
- 7e4:	e58c018c 	str	r0, [ip, #396]	; 0x18c
- 7e8:	e3560000 	cmp	r6, #0
- 7ec:	e59c4004 	ldr	r4, [ip, #4]
- 7f0:	1a000007 	bne	814 <__register_exitproc+0xb4>
- 7f4:	e2843002 	add	r3, r4, #2
- 7f8:	e2844001 	add	r4, r4, #1
- 7fc:	e78c1103 	str	r1, [ip, r3, lsl #2]
- 800:	e58c4004 	str	r4, [ip, #4]
- 804:	e3a00000 	mov	r0, #0
- 808:	e28dd010 	add	sp, sp, #16
- 80c:	e8bd41f0 	pop	{r4, r5, r6, r7, r8, lr}
- 810:	e12fff1e 	bx	lr
- 814:	e3a00001 	mov	r0, #1
- 818:	e1a00410 	lsl	r0, r0, r4
- 81c:	e08c8104 	add	r8, ip, r4, lsl #2
- 820:	e3560002 	cmp	r6, #2
- 824:	e59c7188 	ldr	r7, [ip, #392]	; 0x188
- 828:	e5883108 	str	r3, [r8, #264]	; 0x108
- 82c:	059c318c 	ldreq	r3, [ip, #396]	; 0x18c
- 830:	e1877000 	orr	r7, r7, r0
- 834:	01830000 	orreq	r0, r3, r0
- 838:	e1a05008 	mov	r5, r8
- 83c:	e5882088 	str	r2, [r8, #136]	; 0x88
- 840:	e58c7188 	str	r7, [ip, #392]	; 0x188
- 844:	058c018c 	streq	r0, [ip, #396]	; 0x18c
- 848:	eaffffe9 	b	7f4 <__register_exitproc+0x94>
- 84c:	00000b44 	.word	0x00000b44
- 850:	00000000 	.word	0x00000000
-
-00000854 <__call_exitprocs>:
- 854:	e92d4ff0 	push	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
- 858:	e59f3168 	ldr	r3, [pc, #360]	; 9c8 <__call_exitprocs+0x174>
- 85c:	e5933000 	ldr	r3, [r3]
- 860:	e24dd014 	sub	sp, sp, #20
- 864:	e58d3004 	str	r3, [sp, #4]
- 868:	e2833f52 	add	r3, r3, #328	; 0x148
- 86c:	e58d0008 	str	r0, [sp, #8]
- 870:	e58d300c 	str	r3, [sp, #12]
- 874:	e1a07001 	mov	r7, r1
- 878:	e3a08001 	mov	r8, #1
- 87c:	e59d3004 	ldr	r3, [sp, #4]
- 880:	e5936148 	ldr	r6, [r3, #328]	; 0x148
- 884:	e3560000 	cmp	r6, #0
- 888:	e59db00c 	ldr	fp, [sp, #12]
- 88c:	0a000033 	beq	960 <__call_exitprocs+0x10c>
- 890:	e5965004 	ldr	r5, [r6, #4]
- 894:	e2554001 	subs	r4, r5, #1
- 898:	5286a088 	addpl	sl, r6, #136	; 0x88
- 89c:	5285501f 	addpl	r5, r5, #31
- 8a0:	508a5105 	addpl	r5, sl, r5, lsl #2
- 8a4:	5a000007 	bpl	8c8 <__call_exitprocs+0x74>
- 8a8:	ea000029 	b	954 <__call_exitprocs+0x100>
- 8ac:	e5953000 	ldr	r3, [r5]
- 8b0:	e1530007 	cmp	r3, r7
- 8b4:	0a000005 	beq	8d0 <__call_exitprocs+0x7c>
- 8b8:	e2444001 	sub	r4, r4, #1
- 8bc:	e3740001 	cmn	r4, #1
- 8c0:	e2455004 	sub	r5, r5, #4
- 8c4:	0a000022 	beq	954 <__call_exitprocs+0x100>
- 8c8:	e3570000 	cmp	r7, #0
- 8cc:	1afffff6 	bne	8ac <__call_exitprocs+0x58>
- 8d0:	e5963004 	ldr	r3, [r6, #4]
- 8d4:	e06a2005 	rsb	r2, sl, r5
- 8d8:	e2433001 	sub	r3, r3, #1
- 8dc:	e0862002 	add	r2, r6, r2
- 8e0:	e1530004 	cmp	r3, r4
- 8e4:	e5123078 	ldr	r3, [r2, #-120]	; 0xffffff88
- 8e8:	13a01000 	movne	r1, #0
- 8ec:	05864004 	streq	r4, [r6, #4]
- 8f0:	15021078 	strne	r1, [r2, #-120]	; 0xffffff88
- 8f4:	e3530000 	cmp	r3, #0
- 8f8:	0affffee 	beq	8b8 <__call_exitprocs+0x64>
- 8fc:	e1a02418 	lsl	r2, r8, r4
- 900:	e5961188 	ldr	r1, [r6, #392]	; 0x188
- 904:	e1120001 	tst	r2, r1
- 908:	e5969004 	ldr	r9, [r6, #4]
- 90c:	0a000016 	beq	96c <__call_exitprocs+0x118>
- 910:	e596118c 	ldr	r1, [r6, #396]	; 0x18c
- 914:	e1120001 	tst	r2, r1
- 918:	1a000016 	bne	978 <__call_exitprocs+0x124>
- 91c:	e59d0008 	ldr	r0, [sp, #8]
- 920:	e5151080 	ldr	r1, [r5, #-128]	; 0xffffff80
- 924:	e1a0e00f 	mov	lr, pc
- 928:	e12fff13 	bx	r3
- 92c:	e5963004 	ldr	r3, [r6, #4]
- 930:	e1530009 	cmp	r3, r9
- 934:	1affffd0 	bne	87c <__call_exitprocs+0x28>
- 938:	e59b3000 	ldr	r3, [fp]
- 93c:	e1530006 	cmp	r3, r6
- 940:	1affffcd 	bne	87c <__call_exitprocs+0x28>
- 944:	e2444001 	sub	r4, r4, #1
- 948:	e3740001 	cmn	r4, #1
- 94c:	e2455004 	sub	r5, r5, #4
- 950:	1affffdc 	bne	8c8 <__call_exitprocs+0x74>
- 954:	e59f1070 	ldr	r1, [pc, #112]	; 9cc <__call_exitprocs+0x178>
- 958:	e3510000 	cmp	r1, #0
- 95c:	1a000009 	bne	988 <__call_exitprocs+0x134>
- 960:	e28dd014 	add	sp, sp, #20
- 964:	e8bd4ff0 	pop	{r4, r5, r6, r7, r8, r9, sl, fp, lr}
- 968:	e12fff1e 	bx	lr
- 96c:	e1a0e00f 	mov	lr, pc
- 970:	e12fff13 	bx	r3
- 974:	eaffffec 	b	92c <__call_exitprocs+0xd8>
- 978:	e5150080 	ldr	r0, [r5, #-128]	; 0xffffff80
- 97c:	e1a0e00f 	mov	lr, pc
- 980:	e12fff13 	bx	r3
- 984:	eaffffe8 	b	92c <__call_exitprocs+0xd8>
- 988:	e5963004 	ldr	r3, [r6, #4]
- 98c:	e3530000 	cmp	r3, #0
- 990:	e5963000 	ldr	r3, [r6]
- 994:	1a000008 	bne	9bc <__call_exitprocs+0x168>
- 998:	e3530000 	cmp	r3, #0
- 99c:	0a000006 	beq	9bc <__call_exitprocs+0x168>
- 9a0:	e1a00006 	mov	r0, r6
- 9a4:	e58b3000 	str	r3, [fp]
- 9a8:	e320f000 	nop	{0}
- 9ac:	e59b6000 	ldr	r6, [fp]
- 9b0:	e3560000 	cmp	r6, #0
- 9b4:	1affffb5 	bne	890 <__call_exitprocs+0x3c>
- 9b8:	eaffffe8 	b	960 <__call_exitprocs+0x10c>
- 9bc:	e1a0b006 	mov	fp, r6
- 9c0:	e1a06003 	mov	r6, r3
- 9c4:	eafffff9 	b	9b0 <__call_exitprocs+0x15c>
- 9c8:	00000b44 	.word	0x00000b44
- 9cc:	00000000 	.word	0x00000000
-
-000009d0 <register_fini>:
- 9d0:	e92d4008 	push	{r3, lr}
- 9d4:	e59f3010 	ldr	r3, [pc, #16]	; 9ec <register_fini+0x1c>
- 9d8:	e3530000 	cmp	r3, #0
- 9dc:	159f000c 	ldrne	r0, [pc, #12]	; 9f0 <register_fini+0x20>
- 9e0:	1bffff49 	blne	70c <atexit>
- 9e4:	e8bd4008 	pop	{r3, lr}
- 9e8:	e12fff1e 	bx	lr
- 9ec:	00000b6c 	.word	0x00000b6c
- 9f0:	000009f4 	.word	0x000009f4
-
-000009f4 <__libc_fini_array>:
- 9f4:	e92d4038 	push	{r3, r4, r5, lr}
- 9f8:	e59f5030 	ldr	r5, [pc, #48]	; a30 <__libc_fini_array+0x3c>
- 9fc:	e59f4030 	ldr	r4, [pc, #48]	; a34 <__libc_fini_array+0x40>
- a00:	e0654004 	rsb	r4, r5, r4
- a04:	e1b04144 	asrs	r4, r4, #2
- a08:	10855104 	addne	r5, r5, r4, lsl #2
- a0c:	0a000004 	beq	a24 <__libc_fini_array+0x30>
- a10:	e5353004 	ldr	r3, [r5, #-4]!
- a14:	e1a0e00f 	mov	lr, pc
- a18:	e12fff13 	bx	r3
- a1c:	e2544001 	subs	r4, r4, #1
- a20:	1afffffa 	bne	a10 <__libc_fini_array+0x1c>
- a24:	eb000050 	bl	b6c <__libc_fini>
- a28:	e8bd4038 	pop	{r3, r4, r5, lr}
- a2c:	e12fff1e 	bx	lr
- a30:	00000b84 	.word	0x00000b84
- a34:	00000b88 	.word	0x00000b88
-
-00000a38 <__cs3_premain>:
- a38:	e92d4008 	push	{r3, lr}
- a3c:	eb00001d 	bl	ab8 <__libc_init_array>
- a40:	e59f3030 	ldr	r3, [pc, #48]	; a78 <__cs3_premain+0x40>
- a44:	e3530000 	cmp	r3, #0
- a48:	15930000 	ldrne	r0, [r3]
- a4c:	01a00003 	moveq	r0, r3
- a50:	e59f3024 	ldr	r3, [pc, #36]	; a7c <__cs3_premain+0x44>
- a54:	e3530000 	cmp	r3, #0
- a58:	15931000 	ldrne	r1, [r3]
- a5c:	01a01003 	moveq	r1, r3
- a60:	e3a02000 	mov	r2, #0
- a64:	ebfffec7 	bl	588 <main>
- a68:	e59f3010 	ldr	r3, [pc, #16]	; a80 <__cs3_premain+0x48>
- a6c:	e3530000 	cmp	r3, #0
- a70:	1bffff2d 	blne	72c <exit>
- a74:	eafffffe 	b	a74 <__cs3_premain+0x3c>
+0000095c <__cs3_premain>:
+ 95c:	e92d4008 	push	{r3, lr}
+ 960:	eb00001d 	bl	9dc <__libc_init_array>
+ 964:	e59f3030 	ldr	r3, [pc, #48]	; 99c <__cs3_premain+0x40>
+ 968:	e3530000 	cmp	r3, #0
+ 96c:	15930000 	ldrne	r0, [r3]
+ 970:	01a00003 	moveq	r0, r3
+ 974:	e59f3024 	ldr	r3, [pc, #36]	; 9a0 <__cs3_premain+0x44>
+ 978:	e3530000 	cmp	r3, #0
+ 97c:	15931000 	ldrne	r1, [r3]
+ 980:	01a01003 	moveq	r1, r3
+ 984:	e3a02000 	mov	r2, #0
+ 988:	ebfffecf 	bl	4cc <main>
+ 98c:	e59f3010 	ldr	r3, [pc, #16]	; 9a4 <__cs3_premain+0x48>
+ 990:	e3530000 	cmp	r3, #0
+ 994:	1bffff2d 	blne	650 <exit>
+ 998:	eafffffe 	b	998 <__cs3_premain+0x3c>
 	...
- a80:	0000072c 	.word	0x0000072c
+ 9a4:	00000650 	.word	0x00000650
 
-00000a84 <_exit>:
- a84:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
- a88:	e3a00018 	mov	r0, #24
- a8c:	e59f1004 	ldr	r1, [pc, #4]	; a98 <_exit+0x14>
- a90:	ef123456 	svc	0x00123456
- a94:	eafffffe 	b	a94 <_exit+0x10>
- a98:	00020026 	.word	0x00020026
+000009a8 <_exit>:
+ 9a8:	e52de004 	push	{lr}		; (str lr, [sp, #-4]!)
+ 9ac:	e3a00018 	mov	r0, #24
+ 9b0:	e59f1004 	ldr	r1, [pc, #4]	; 9bc <_exit+0x14>
+ 9b4:	ef123456 	svc	0x00123456
+ 9b8:	eafffffe 	b	9b8 <_exit+0x10>
+ 9bc:	00020026 	.word	0x00020026
 
-00000a9c <__cs3_isr_interrupt>:
- a9c:	eafffffe 	b	a9c <__cs3_isr_interrupt>
+000009c0 <__cs3_isr_interrupt>:
+ 9c0:	eafffffe 	b	9c0 <__cs3_isr_interrupt>
 
-00000aa0 <__cs3_isr_undef>:
- aa0:	eafffffe 	b	aa0 <__cs3_isr_undef>
+000009c4 <__cs3_isr_undef>:
+ 9c4:	eafffffe 	b	9c4 <__cs3_isr_undef>
 
-00000aa4 <__cs3_isr_swi>:
- aa4:	eafffffe 	b	aa4 <__cs3_isr_swi>
+000009c8 <__cs3_isr_swi>:
+ 9c8:	eafffffe 	b	9c8 <__cs3_isr_swi>
 
-00000aa8 <__cs3_isr_pabort>:
- aa8:	eafffffe 	b	aa8 <__cs3_isr_pabort>
+000009cc <__cs3_isr_pabort>:
+ 9cc:	eafffffe 	b	9cc <__cs3_isr_pabort>
 
-00000aac <__cs3_isr_dabort>:
- aac:	eafffffe 	b	aac <__cs3_isr_dabort>
+000009d0 <__cs3_isr_dabort>:
+ 9d0:	eafffffe 	b	9d0 <__cs3_isr_dabort>
 
-00000ab0 <__cs3_isr_irq>:
- ab0:	eafffffe 	b	ab0 <__cs3_isr_irq>
+000009d4 <__cs3_isr_irq>:
+ 9d4:	eafffffe 	b	9d4 <__cs3_isr_irq>
 
-00000ab4 <__cs3_isr_fiq>:
- ab4:	eafffffe 	b	ab4 <__cs3_isr_fiq>
+000009d8 <__cs3_isr_fiq>:
+ 9d8:	eafffffe 	b	9d8 <__cs3_isr_fiq>
 
-00000ab8 <__libc_init_array>:
- ab8:	e92d4070 	push	{r4, r5, r6, lr}
- abc:	e59f506c 	ldr	r5, [pc, #108]	; b30 <__libc_init_array+0x78>
- ac0:	e59f606c 	ldr	r6, [pc, #108]	; b34 <__libc_init_array+0x7c>
- ac4:	e0656006 	rsb	r6, r5, r6
- ac8:	e1b06146 	asrs	r6, r6, #2
- acc:	12455004 	subne	r5, r5, #4
- ad0:	13a04000 	movne	r4, #0
- ad4:	0a000005 	beq	af0 <__libc_init_array+0x38>
- ad8:	e5b53004 	ldr	r3, [r5, #4]!
- adc:	e2844001 	add	r4, r4, #1
- ae0:	e1a0e00f 	mov	lr, pc
- ae4:	e12fff13 	bx	r3
- ae8:	e1560004 	cmp	r6, r4
- aec:	1afffff9 	bne	ad8 <__libc_init_array+0x20>
- af0:	e59f5040 	ldr	r5, [pc, #64]	; b38 <__libc_init_array+0x80>
- af4:	e59f6040 	ldr	r6, [pc, #64]	; b3c <__libc_init_array+0x84>
- af8:	e0656006 	rsb	r6, r5, r6
- afc:	eb000012 	bl	b4c <_init>
- b00:	e1b06146 	asrs	r6, r6, #2
- b04:	12455004 	subne	r5, r5, #4
- b08:	13a04000 	movne	r4, #0
- b0c:	0a000005 	beq	b28 <__libc_init_array+0x70>
- b10:	e5b53004 	ldr	r3, [r5, #4]!
- b14:	e2844001 	add	r4, r4, #1
- b18:	e1a0e00f 	mov	lr, pc
- b1c:	e12fff13 	bx	r3
- b20:	e1560004 	cmp	r6, r4
- b24:	1afffff9 	bne	b10 <__libc_init_array+0x58>
- b28:	e8bd4070 	pop	{r4, r5, r6, lr}
- b2c:	e12fff1e 	bx	lr
- b30:	00000b64 	.word	0x00000b64
- b34:	00000b64 	.word	0x00000b64
- b38:	00000b64 	.word	0x00000b64
- b3c:	00000b6c 	.word	0x00000b6c
+000009dc <__libc_init_array>:
+ 9dc:	e92d4070 	push	{r4, r5, r6, lr}
+ 9e0:	e59f506c 	ldr	r5, [pc, #108]	; a54 <__libc_init_array+0x78>
+ 9e4:	e59f606c 	ldr	r6, [pc, #108]	; a58 <__libc_init_array+0x7c>
+ 9e8:	e0656006 	rsb	r6, r5, r6
+ 9ec:	e1b06146 	asrs	r6, r6, #2
+ 9f0:	12455004 	subne	r5, r5, #4
+ 9f4:	13a04000 	movne	r4, #0
+ 9f8:	0a000005 	beq	a14 <__libc_init_array+0x38>
+ 9fc:	e5b53004 	ldr	r3, [r5, #4]!
+ a00:	e2844001 	add	r4, r4, #1
+ a04:	e1a0e00f 	mov	lr, pc
+ a08:	e12fff13 	bx	r3
+ a0c:	e1560004 	cmp	r6, r4
+ a10:	1afffff9 	bne	9fc <__libc_init_array+0x20>
+ a14:	e59f5040 	ldr	r5, [pc, #64]	; a5c <__libc_init_array+0x80>
+ a18:	e59f6040 	ldr	r6, [pc, #64]	; a60 <__libc_init_array+0x84>
+ a1c:	e0656006 	rsb	r6, r5, r6
+ a20:	eb000012 	bl	a70 <_init>
+ a24:	e1b06146 	asrs	r6, r6, #2
+ a28:	12455004 	subne	r5, r5, #4
+ a2c:	13a04000 	movne	r4, #0
+ a30:	0a000005 	beq	a4c <__libc_init_array+0x70>
+ a34:	e5b53004 	ldr	r3, [r5, #4]!
+ a38:	e2844001 	add	r4, r4, #1
+ a3c:	e1a0e00f 	mov	lr, pc
+ a40:	e12fff13 	bx	r3
+ a44:	e1560004 	cmp	r6, r4
+ a48:	1afffff9 	bne	a34 <__libc_init_array+0x58>
+ a4c:	e8bd4070 	pop	{r4, r5, r6, lr}
+ a50:	e12fff1e 	bx	lr
+ a54:	00000a88 	.word	0x00000a88
+ a58:	00000a88 	.word	0x00000a88
+ a5c:	00000a88 	.word	0x00000a88
+ a60:	00000a90 	.word	0x00000a90
 
 Disassembly of section .rodata:
 
-00000b44 <_global_impure_ptr>:
- b44:	00000bb8 00000043                       ....C...
+00000a68 <_global_impure_ptr>:
+ a68:	00000ad8 00000043                       ....C...
 
-00000b4c <_init>:
- b4c:	e1a0c00d 	mov	ip, sp
- b50:	e92ddff8 	push	{r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, lr, pc}
- b54:	e24cb004 	sub	fp, ip, #4
- b58:	e24bd028 	sub	sp, fp, #40	; 0x28
- b5c:	e89d6ff0 	ldm	sp, {r4, r5, r6, r7, r8, r9, sl, fp, sp, lr}
- b60:	e12fff1e 	bx	lr
+00000a70 <_init>:
+ a70:	e1a0c00d 	mov	ip, sp
+ a74:	e92ddff8 	push	{r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, lr, pc}
+ a78:	e24cb004 	sub	fp, ip, #4
+ a7c:	e24bd028 	sub	sp, fp, #40	; 0x28
+ a80:	e89d6ff0 	ldm	sp, {r4, r5, r6, r7, r8, r9, sl, fp, sp, lr}
+ a84:	e12fff1e 	bx	lr
 
-00000b64 <__init_array_start>:
- b64:	000009d0 	.word	0x000009d0
+00000a88 <__init_array_start>:
+ a88:	000008f4 	.word	0x000008f4
 
-00000b68 <__frame_dummy_init_array_entry>:
- b68:	00000208                                ....
+00000a8c <__frame_dummy_init_array_entry>:
+ a8c:	00000208                                ....
 
-00000b6c <__libc_fini>:
- b6c:	e1a0c00d 	mov	ip, sp
- b70:	e92ddff8 	push	{r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, lr, pc}
- b74:	e24cb004 	sub	fp, ip, #4
- b78:	e24bd028 	sub	sp, fp, #40	; 0x28
- b7c:	e89d6ff0 	ldm	sp, {r4, r5, r6, r7, r8, r9, sl, fp, sp, lr}
- b80:	e12fff1e 	bx	lr
+00000a90 <__libc_fini>:
+ a90:	e1a0c00d 	mov	ip, sp
+ a94:	e92ddff8 	push	{r3, r4, r5, r6, r7, r8, r9, sl, fp, ip, lr, pc}
+ a98:	e24cb004 	sub	fp, ip, #4
+ a9c:	e24bd028 	sub	sp, fp, #40	; 0x28
+ aa0:	e89d6ff0 	ldm	sp, {r4, r5, r6, r7, r8, r9, sl, fp, sp, lr}
+ aa4:	e12fff1e 	bx	lr
 
-00000b84 <__fini_array_start>:
- b84:	000001c4 	.word	0x000001c4
+00000aa8 <__fini_array_start>:
+ aa8:	000001c4 	.word	0x000001c4
 
-00000b88 <__cs3_regions>:
+00000aac <__cs3_regions>:
 	...
- b94:	00000fe8 	.word	0x00000fe8
- b98:	00000020 	.word	0x00000020
-
-00000b9c <__cs3_regions_end>:
- b9c:	00000000 	.word	0x00000000
+ ab8:	00000f08 	.word	0x00000f08
+ abc:	00000020 	.word	0x00000020
