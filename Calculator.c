@@ -19,6 +19,7 @@ int countDigit(int val) {
   return count;
 }
 
+//convert from interger value to binary value
 unsigned intToBin(unsigned k) {
   if (k == 0) return 0;
   if (k == 1) return 1; /* optional */
@@ -41,6 +42,7 @@ void DisplayError() {
   * Display2_ptr = Letter_E;
 }
 
+//Display the Operator ID on 7-segment Display
 void DisplayOperator(int oprID) {
   char oprTable[5];
   oprTable[0] = 0x3F; // used as capital letter 'O'
@@ -48,7 +50,6 @@ void DisplayOperator(int oprID) {
   oprTable[2] = 0x5B; // -
   oprTable[3] = 0x4F; // x
   oprTable[4] = 0x66; // /
-
   int BYTE = 8;
   int letter_p = 0x73; //1110011
   int letter_r = 0x50; //1010000
@@ -61,7 +62,7 @@ void DisplayOperator(int oprID) {
   * Display2_ptr = 0x00;
 }
 
-// Displays number on 7 seg display
+// Displays numbers on 7 seg display
 void DisplayValue(int value) { // max = 10, displays number from 0 - 9
   char lookUpTable[10];
   lookUpTable[0] = 0x3F;
@@ -74,9 +75,7 @@ void DisplayValue(int value) { // max = 10, displays number from 0 - 9
   lookUpTable[7] = 0x07;
   lookUpTable[8] = 0x7F;
   lookUpTable[9] = 0x6F;
-
   int BYTE = 8;
-  int bit1, bit2, bit3, bit4, bit5, bit6;
   // if value can be represented by 6 digits
   int bitArray[6];
   int i = 5;
@@ -85,13 +84,13 @@ void DisplayValue(int value) { // max = 10, displays number from 0 - 9
     value /= 10;
     i--;
   }
-
-  bit6 = lookUpTable[bitArray[0]];
-  bit5 = lookUpTable[bitArray[1]];
-  bit4 = lookUpTable[bitArray[2]];
-  bit3 = lookUpTable[bitArray[3]];
-  bit2 = lookUpTable[bitArray[4]];
-  bit1 = lookUpTable[bitArray[5]];
+  //assign bit b=values with digits
+  int bit6 = lookUpTable[bitArray[0]];
+  int bit5 = lookUpTable[bitArray[1]];
+  int bit4 = lookUpTable[bitArray[2]];
+  int bit3 = lookUpTable[bitArray[3]];
+  int bit2 = lookUpTable[bitArray[4]];
+  int bit1 = lookUpTable[bitArray[5]];
 
   // Displaying bit 1 - 4 of value 
   * Display1_ptr = bit4 << (3 * BYTE) |
@@ -104,14 +103,12 @@ void DisplayValue(int value) { // max = 10, displays number from 0 - 9
     bit5 << (0 * BYTE);
 }
 
-
 // Reads buttons
 int ReadButton(int btn) {
   volatile int * BTN_ptr = (int * ) KEY_BASE;
   // Returns 1 if the given button is pressed, 0 otherwise due to & operator
   return (( * BTN_ptr >> (btn)) & 1);
 }
-
 
 // Reads switches
 int ReadSwitch(int sw) {
@@ -133,35 +130,136 @@ int GetInput(void) {
 
 
 
+int showingOperator() {
+  if (ReadButton(0) || ReadButton(1) || ReadButton(2) || ReadButton(3)) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
 int answer;
+int num1;
+int num2;
+int operator;
 
 int main(void) {
 
   DisplayValue(0); // Initialize display
   // Main loop
   while (1) {
-    // plus
-    if (ReadButton(0) && !ReadButton(1) && !ReadButton(3) && !ReadButton(3)) {
-      DisplayOperator(1);
-    }
-    // minus
-    if (!ReadButton(0) && ReadButton(1) && !ReadButton(2) && !ReadButton(3)) {
-      DisplayOperator(2);
-    }
-    // multiply
-    if (!ReadButton(0) && !ReadButton(1) && ReadButton(2) && !ReadButton(3)) {
-      DisplayOperator(3);
-    }
-    //divide
-    if (!ReadButton(0) && !ReadButton(1) && !ReadButton(2) && ReadButton(3)) {
-      DisplayOperator(4);
-    }
+    //turn display off when switch 9 is not flipped
+    if (!ReadSwitch(9)) {
+      * Display2_ptr = 0x00;
+      * Display1_ptr = 0x00;
+    } else if (ReadSwitch(9)) {
+      // plus
+      if (ReadButton(0) && !ReadButton(1) && !ReadButton(2) && !ReadButton(3)) {
+        DisplayOperator(1);
+        operator = 1;
+        num1 = GetInput();
 
-    // switch mode
-    if (ReadSwitch(9)){
-        DisplayValue(GetInput());
-    } else {
-        DisplayValue(intToBin(GetInput()));
+      }
+      // minus
+      if (!ReadButton(0) && ReadButton(1) && !ReadButton(2) && !ReadButton(3)) {
+        DisplayOperator(2);
+        operator = 2;
+        num1 = GetInput();
+      }
+      // multiply
+      if (!ReadButton(0) && !ReadButton(1) && ReadButton(2) && !ReadButton(3)) {
+        DisplayOperator(3);
+        operator = 3;
+        num1 = GetInput();
+      }
+      //divide
+      if (!ReadButton(0) && !ReadButton(1) && !ReadButton(2) && ReadButton(3)) {
+        DisplayOperator(4);
+        operator = 4;
+        num1 = GetInput();
+      }
+
+      // switch mode
+      if (ReadSwitch(6) && showingOperator() == 0 && !ReadSwitch(7)) {
+        // display decimal value
+        if (countDigit(GetInput()) <= 6) {
+          DisplayValue(GetInput());
+        } else {
+          DisplayError();
+        }
+      } else if (!ReadSwitch(6) && showingOperator() == 0 && !ReadSwitch(7)) {
+        // display binary value
+        if (countDigit(intToBin(GetInput())) <= 6) {
+          DisplayValue(intToBin(GetInput()));
+        } else {
+          DisplayError();
+        }
+      }
+      // show answer
+      if (ReadSwitch(7)) {
+        num2 = GetInput();
+        if (operator == 1) {
+          answer = num1 + num2;
+          if (!ReadSwitch(6)) { //not in decimal mode
+            if (countDigit(intToBin(answer)) <= 6) {
+              DisplayValue(intToBin(answer));
+            } else {
+              DisplayError();
+            }
+          } else {
+            if (countDigit(answer) <= 6) {
+              DisplayValue(answer);
+            } else {
+              DisplayError();
+            }
+          }
+        } else if (operator == 2) {
+          answer = num1 - num2;
+          if (!ReadSwitch(6)) { //not in decimal mode
+            if (countDigit(intToBin(answer)) <= 6) {
+              DisplayValue(intToBin(answer));
+            } else {
+              DisplayError();
+            }
+          } else {
+            if (countDigit(answer) <= 6) {
+              DisplayValue(answer);
+            } else {
+              DisplayError();
+            }
+          }
+        } else if (operator == 3) {
+          answer = num1 * num2;
+          if (!ReadSwitch(6)) { //not in decimal mode
+            if (countDigit(intToBin(answer)) <= 6) {
+              DisplayValue(intToBin(answer));
+            } else {
+              DisplayError();
+            }
+          } else {
+            if (countDigit(answer) <= 6) {
+              DisplayValue(answer);
+            } else {
+              DisplayError();
+            }
+          }
+        } else if (operator == 4) {
+          answer = num1 / num2;
+          if (!ReadSwitch(6)) { //not in decimal mode
+            if (countDigit(intToBin(answer)) <= 6) {
+              DisplayValue(intToBin(answer));
+            } else {
+              DisplayError();
+            }
+          } else {
+            if (countDigit(answer) <= 6) {
+              DisplayValue(answer);
+            } else {
+              DisplayError();
+            }
+          }
+        }
+      }
     }
   }
 }
