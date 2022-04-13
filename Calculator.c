@@ -114,7 +114,7 @@ int ReadButton(int btn) {
 int ReadSwitch(int sw) {
   // pointer to switch address
   volatile int * SW_ptr = (int * ) SW_BASE;
-  // Returns 1 if the given button is pressed, 0 otherwise due to & operator
+  // Returns 1 if the given switch is flipped, 0 otherwise due to & operator
   return (( * SW_ptr >> (sw)) & 1);
 }
 
