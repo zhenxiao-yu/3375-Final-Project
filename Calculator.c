@@ -128,10 +128,12 @@ int GetInput(void) {
   return (inputValue % (2 * 2 * 2 * 2 * 2 * 2));
 }
 
-
-
 int showingOperator() {
-  if (ReadButton(0) || ReadButton(1) || ReadButton(2) || ReadButton(3)) {
+  if (ReadButton(0) 
+      || ReadButton(1) 
+      || ReadButton(2) 
+      || ReadButton(3)) 
+  {
     return 1;
   } else {
     return 0;
