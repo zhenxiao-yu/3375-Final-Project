@@ -1,13 +1,13 @@
-#include "address_map_arm.h";
-
 // define mappings manually for simulator
 #define HEX3_HEX0_BASE 0xFF200020
 #define HEX5_HEX4_BASE 0xFF200030
 #define SW_BASE 0xFF200040
 #define KEY_BASE 0xFF200050
+#define LED_BASE 0xFF200000
 
 volatile int * Display1_ptr = (int * ) HEX3_HEX0_BASE;
 volatile int * Display2_ptr = (int * ) HEX5_HEX4_BASE;
+volatile int * LED_ptr = (int * ) LED_BASE;
 
 //* utilty functions*//
 int countDigit(int val) {
@@ -144,8 +144,8 @@ int num2;
 int operator;
 
 int main(void) {
-
   DisplayValue(0); // Initialize display
+	*LED_ptr = 0b0000000000;
   // Main loop
   while (1) {
     //turn display off when switch 9 is not flipped
@@ -158,25 +158,28 @@ int main(void) {
         DisplayOperator(1);
         operator = 1;
         num1 = GetInput();
-
+		*LED_ptr = 0b0000011111;
       }
       // minus
       if (!ReadButton(0) && ReadButton(1) && !ReadButton(2) && !ReadButton(3)) {
         DisplayOperator(2);
         operator = 2;
         num1 = GetInput();
+		*LED_ptr = 0b0000011111;
       }
       // multiply
       if (!ReadButton(0) && !ReadButton(1) && ReadButton(2) && !ReadButton(3)) {
         DisplayOperator(3);
         operator = 3;
         num1 = GetInput();
+		*LED_ptr = 0b0000011111;
       }
       //divide
       if (!ReadButton(0) && !ReadButton(1) && !ReadButton(2) && ReadButton(3)) {
         DisplayOperator(4);
         operator = 4;
         num1 = GetInput();
+		*LED_ptr = 0b0000011111;
       }
 
       // switch mode
@@ -203,12 +206,14 @@ int main(void) {
           answer = 0;
           operator = 0;
           DisplayValue(0);
+		  *LED_ptr = 0b0000000000;
       }
 
       // show answer
-      if (ReadSwitch(7) && !ReadSwitch(8)) {
+      if (ReadSwitch(7) && !ReadSwitch(8)) {  
         num2 = GetInput();
         if (operator == 1) {
+		  *LED_ptr = 0b1111111111;	
           answer = num1 + num2;
           if (!ReadSwitch(6)) { //not in decimal mode
             if (countDigit(intToBin(answer)) <= 6 && answer>=0) {
@@ -224,6 +229,7 @@ int main(void) {
             }
           }
         } else if (operator == 2) {
+		  *LED_ptr = 0b1111111111;	
           answer = num1 - num2;
           if (!ReadSwitch(6)) { //not in decimal mode
             if (countDigit(intToBin(answer)) <= 6 && answer>=0) {
@@ -239,6 +245,7 @@ int main(void) {
             }
           }
         } else if (operator == 3) {
+		  *LED_ptr = 0b1111111111;
           answer = num1 * num2;
           if (!ReadSwitch(6)) { //not in decimal mode
             if (countDigit(intToBin(answer)) <= 6 && answer>=0) {
@@ -254,6 +261,7 @@ int main(void) {
             }
           }
         } else if (operator == 4) {
+		  *LED_ptr = 0b1111111111;
           answer = num1 / num2;
           if (!ReadSwitch(6)) { //not in decimal mode
             if (countDigit(intToBin(answer)) <= 6 && answer>=0) {
@@ -262,7 +270,7 @@ int main(void) {
               DisplayError();
             }
           } else {
-            if (countDigit(answer) <= 6 && answer>=0) {
+            if (countDigit(answer) <= 6 && answer>=0) {	
               DisplayValue(answer);
             } else {
               DisplayError();
